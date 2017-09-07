@@ -34,7 +34,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.mapService.tracePlaceline(userData);
         this.mapService.resetBounds()
       } else {
-
+        this.mapService.segmentTrace.trace(null, this.mapService.map)
       }
 
     });

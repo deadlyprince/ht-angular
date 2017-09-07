@@ -8,6 +8,7 @@ import {MapModule} from "./map/map.module";
 import {SharedModule} from "./shared/shared.module";
 import {UserCardModule} from "./user-card/user-card.module";
 import {PlacelineModule} from "./placeline/placeline.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 require('leaflet');
 
@@ -45,7 +46,8 @@ import {UsersContainerModule} from "./users-container/users-container.module";
     SharedModule,
     UsersContainerModule,
     UserCardModule,
-    PlacelineModule
+    PlacelineModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

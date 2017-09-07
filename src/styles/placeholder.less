@@ -285,31 +285,34 @@ a {
     font-size: 10px;
     font-weight: 300;
   }
-  @content-padding: 20px;
+  @content-padding-side: 10px;
   &-content {
-    padding-right: @content-padding;
-    padding-left: @content-padding;
+    padding-right: @content-padding-side;
+    padding-left: @content-padding-side;
     &-top {
-      padding-right: @content-padding;
-      padding-left: @content-padding;
+      padding-right: @content-padding-side;
+      padding-left: @content-padding-side;
       padding-top: 10px;
     }
     &-bottom{
-      padding-right: @content-padding;
-      padding-left: @content-padding;
+      padding-right: @content-padding-side;
+      padding-left: @content-padding-side;
       padding-bottom: 10px;
     }
     &-mid{
-      padding-right: @content-padding;
-      padding-left: @content-padding;
+      padding-right: @content-padding-side;
+      padding-left: @content-padding-side;
       padding-top: 10px;
       padding-bottom: 10px;
     }
   }
   .border {
-    padding-right: @content-padding;
-    padding-left: @content-padding;
+    padding-right: @content-padding-side;
+    padding-left: @content-padding-side;
     border-top: 1px solid @ht-grey-2;
+  }
+  &-selected {
+    background: @ht-grey-1;
   }
 }
 

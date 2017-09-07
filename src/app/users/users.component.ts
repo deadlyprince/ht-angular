@@ -1,11 +1,15 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IUserAnalytics, IUserAnalyticsPage} from "ht-models";
+import {anim} from "../../animations/appear";
 
 @Component({
   selector: 'ht-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    anim.card
+  ]
 })
 export class UsersComponent implements OnInit {
   userCardAction;

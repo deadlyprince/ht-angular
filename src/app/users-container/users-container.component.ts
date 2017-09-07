@@ -51,6 +51,10 @@ export class UsersContainerComponent implements OnInit {
 
   }
 
+  clear() {
+    this.mapService.segmentTrace.trace(null, this.mapService.map)
+  }
+
   onAction(payload) {
     switch (payload['action']) {
       case "close":

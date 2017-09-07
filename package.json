@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
+    "font-awesome": "^4.7.0",
     "ht-angular-client": "0.0.1",
     "ht-js-client": "0.0.6",
     "ht-js-data": "file:../ht-sdk/packages/data",

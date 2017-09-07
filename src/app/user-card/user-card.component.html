@@ -1,6 +1,6 @@
 <div class="card-content-mid flex-row">
   <div class="text-left flex-row row-gap-10 flex">
-    <ht-profile [url]="user.photo"></ht-profile>
+    <ht-profile [height]="33" [url]="user.photo"></ht-profile>
     <div class="user-info-container">
       <div class="user-name flex-row">
         {{user.name | nameCase | dot: 'Unknown users'}}
@@ -17,7 +17,7 @@
 
     </div>
   </div>
-  <div *ngIf="action !== 'loading'; else loading" class="flex-row">
+  <div *ngIf="action !== 'loading'; else loading" [@cardAction]="action == 'default' && !hovered ? 'inactive' : 'active'" class="flex-row">
     <button class="auto" (click)="fireAction()" *ngIf="getActionText()">
       {{getActionText()}}
     </button>
