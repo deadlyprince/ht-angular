@@ -32,19 +32,20 @@ export class UsersContainerComponent implements OnInit {
     this.loadingUserDataId$ = this.userService.placeline.loadingObserver.data$().distinctUntilChanged();
     this.loadingUserId$ = this.userService.analytics.loadingObserver.data$().distinctUntilChanged();
 
-    Observable.combineLatest(
-      this.userService.placeline.loadingObserver.data$().distinctUntilChanged(),
-      this.userService.analytics.loadingObserver.data$().distinctUntilChanged(),
-      (loadingUserData, loadingUser) => {
-        console.log(loadingUserData, loadingUser, "loading user");
-        return !!loadingUser || !!loadingUserData;
-      }
-    ).subscribe((loading) => {
-      // console.log("loading", loading);
-    })
-    this.users$.subscribe((usersPage) => {
-      // console.log(usersPage, "data");
-    })
+    // Observable.combineLatest(
+    //   this.userService.placeline.loadingObserver.data$().distinctUntilChanged(),
+    //   this.userService.analytics.loadingObserver.data$().distinctUntilChanged(),
+    //   (loadingUserData, loadingUser) => {
+    //     // console.log(loadingUserData, loadingUser, "loading user");
+    //     return !!loadingUser || !!loadingUserData;
+    //   }
+    // ).subscribe((loading) => {
+    //   // console.log("loading", loading);
+    // })
+
+    // this.users$.subscribe((usersPage) => {
+    //   console.log(usersPage, "data");
+    // })
     this.selectedUserDataId$ = this.userService.placeline.idObservable.data$();
     this.selectedUserId$ = this.userService.analytics.idObservable.data$();
 
@@ -75,7 +76,7 @@ export class UsersContainerComponent implements OnInit {
   }
 
   closeUserData(user) {
-    this.userService.placeline.setId(null);
+    // this.userService.placeline.setId(null);
     this.userService.analytics.setId(null)
   }
 

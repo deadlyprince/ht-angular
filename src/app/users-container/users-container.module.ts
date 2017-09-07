@@ -10,7 +10,7 @@ import {UserCardModule} from "../user-card/user-card.module";
   imports: [
     CommonModule,
     UsersModule,
-    UserCardModule,
+    // UserCardModule,
     PlacelineModule,
     SharedModule
   ],

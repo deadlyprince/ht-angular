@@ -17,14 +17,14 @@
 
     </div>
   </div>
-  <div *ngIf="action !== 'loading'; else loading">
-    <button (click)="fireAction()" *ngIf="getActionText()">
+  <div *ngIf="action !== 'loading'; else loading" class="flex-row">
+    <button class="auto" (click)="fireAction()" *ngIf="getActionText()">
       {{getActionText()}}
     </button>
   </div>
   <ng-template #loading>
-    <div class="text-1">
-      <ht-loading-dots></ht-loading-dots>
+    <div class="text-1 flex-row">
+      <ht-loading-dots class="auto"></ht-loading-dots>
     </div>
   </ng-template>
 </div>

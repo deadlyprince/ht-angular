@@ -19,14 +19,15 @@ export class UsersComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 
 
   getAction(user) {
-    console.log("action", this.loadingUserDataId, this.loadingUserId);
+    // console.log("action", this.loadingUserDataId, this.loadingUserId);
     const id = user.id;
-    if (id === this.loadingUserDataId) {
+    if (id === this.loadingUserDataId && (!this.selectedUserId || !user.segments) ) {
       return 'loading'
     } else if (this.selectedUserId === user.id) {
       return "close"

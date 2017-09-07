@@ -8,6 +8,7 @@
     (onSelectUser)="selectUser($event)"
     [users]="users$ | async"></ht-users>
   <div *ngIf="(selectedUserId$ | async) && user$ | async as userData">
+    <!--<ht-user-card [user]="userData"></ht-user-card>-->
     <ht-placeline [userData]="userData"></ht-placeline>
   </div>
 </div>
