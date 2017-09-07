@@ -16,6 +16,8 @@ export class UsersContainerComponent implements OnInit {
   user$;
   selectedUserId$;
   selectedUserDataId$;
+  loadingUserId$;
+  loadingUserDataId$;
   constructor(
     private userService: HtUsersClientService,
     private mapService: HtMapService
@@ -27,8 +29,21 @@ export class UsersContainerComponent implements OnInit {
     this.users$ = this.userService.usersPlaceline$();
     // this.user$ = this.userService.placeline.getListener();
     // console.log(this.users$);
+    this.loadingUserDataId$ = this.userService.placeline.loadingObserver.data$().distinctUntilChanged();
+    this.loadingUserId$ = this.userService.analytics.loadingObserver.data$().distinctUntilChanged();
+
+    Observable.combineLatest(
+      this.userService.placeline.loadingObserver.data$().distinctUntilChanged(),
+      this.userService.analytics.loadingObserver.data$().distinctUntilChanged(),
+      (loadingUserData, loadingUser) => {
+        console.log(loadingUserData, loadingUser, "loading user");
+        return !!loadingUser || !!loadingUserData;
+      }
+    ).subscribe((loading) => {
+      // console.log("loading", loading);
+    })
     this.users$.subscribe((usersPage) => {
-      console.log(usersPage, "data");
+      // console.log(usersPage, "data");
     })
     this.selectedUserDataId$ = this.userService.placeline.idObservable.data$();
     this.selectedUserId$ = this.userService.analytics.idObservable.data$();
@@ -44,8 +59,12 @@ export class UsersContainerComponent implements OnInit {
         this.selectUserData(payload.user);
         break;
       }
+      case "default": {
+        this.selectUserData(payload.user);
+        break
+      }
       default: {
-        this.selectUserData(payload.user)
+
       }
 
     }

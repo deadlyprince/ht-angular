@@ -24,6 +24,8 @@ import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/exhaustMap';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/distinctUntilChanged';
+
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/empty';

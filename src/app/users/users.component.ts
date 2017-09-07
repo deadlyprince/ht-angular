@@ -12,6 +12,8 @@ export class UsersComponent implements OnInit {
   @Input() users: IUserAnalytics[];
   @Input() selectedUserId: string | null;
   @Input() selectedUserDataId: string | null;
+  @Input() loadingUserDataId: string | null;
+  @Input() loadingUserId: string | null;
   @Output() onSelectUser: EventEmitter<string | null> = new EventEmitter();
   @Output() onAction: EventEmitter<string | null> = new EventEmitter();
   constructor() { }
@@ -22,12 +24,15 @@ export class UsersComponent implements OnInit {
 
 
   getAction(user) {
-    // console.log("action", this.selectedUserDataId, this.selectedUserId);
-    if (this.selectedUserId === user.id) {
+    console.log("action", this.loadingUserDataId, this.loadingUserId);
+    const id = user.id;
+    if (id === this.loadingUserDataId) {
+      return 'loading'
+    } else if (this.selectedUserId === user.id) {
       return "close"
     } else if (this.selectedUserDataId === user.id) {
       return 'detail';
-    } else {
+    }  else {
       return "default"
     }
   }

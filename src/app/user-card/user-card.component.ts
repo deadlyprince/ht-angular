@@ -14,7 +14,7 @@ import * as _ from "underscore";
 export class UserCardComponent implements OnInit, OnChanges {
   @Input() user: IUserData | IUserAnalytics | IUser;
   @Input() selectedUserId: string | null = null;
-  @Input() action: 'default' | 'close' | 'detail' = 'default';
+  @Input() action: 'default' | 'close' | 'loading' | 'detail' = 'default';
   @Output() onAction = new EventEmitter();
   showStatus: boolean = true;
   @HostBinding('class') role = 'card flex-column clickable';
@@ -46,6 +46,8 @@ export class UserCardComponent implements OnInit, OnChanges {
         return "Close";
       case "detail" :
         return "";
+      case "loading":
+        return "loading";
       default:
         return "View on Map"
     }
