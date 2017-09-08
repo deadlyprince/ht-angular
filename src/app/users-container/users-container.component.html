@@ -4,6 +4,7 @@
     [selectedUserId]="selectedUserId$ | async"
     [loadingUserDataId]="loadingUserDataId$ | async"
     [loadingUserId]="loadingUserId$ | async"
+    [hasMap]="hasMap"
     (onAction)="onAction($event)"
     (onSelectUser)="selectUser($event)"
     [users]="users$ | async"></ht-users>

@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
   @Input() selectedUserDataId: string | null;
   @Input() loadingUserDataId: string | null;
   @Input() loadingUserId: string | null;
+  @Input() hasMap: boolean = false;
   @Output() onSelectUser: EventEmitter<string | null> = new EventEmitter();
   @Output() onAction: EventEmitter<string | null> = new EventEmitter();
   constructor() { }
@@ -31,6 +32,8 @@ export class UsersComponent implements OnInit {
   getAction(user) {
     // console.log("action", this.loadingUserDataId, this.loadingUserId);
     const id = user.id;
+    if (!this.hasMap) return 'detail';
+
     if (id === this.loadingUserDataId && (!this.selectedUserId || !user.segments) ) {
       return 'loading'
     } else if (this.selectedUserId === user.id) {

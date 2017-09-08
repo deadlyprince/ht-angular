@@ -18,7 +18,7 @@
     </div>
   </div>
   <div *ngIf="action !== 'loading'; else loading" [@cardAction]="action == 'default' && !hovered ? 'inactive' : 'active'" class="flex-row">
-    <button class="auto" (click)="fireAction()" *ngIf="getActionText()">
+    <button class="auto ht-btn ht-btn-card text-uppercase" (click)="fireAction()" *ngIf="getActionText()">
       {{getActionText()}}
     </button>
   </div>

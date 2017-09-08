@@ -20,6 +20,7 @@ import {UserSortingStringPipe} from '../pipes/user-sorting-string.pipe';
 import {ActionSortingStringPipe} from '../pipes/action-sorting-string.pipe';
 import {SafeUrlPipe} from "../pipes/safe-url.pipe";
 import { PluralizePipe } from '../pipes/pluralize.pipe';
+import { ButtonComponent } from './button/button.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { PluralizePipe } from '../pipes/pluralize.pipe';
     SafeUrlPipe,
     UserSortingStringPipe,
     ActionSortingStringPipe,
-    PluralizePipe
+    PluralizePipe,
+    ButtonComponent
   ],
   exports: [
     ProfileComponent,

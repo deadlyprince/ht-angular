@@ -10,9 +10,7 @@ import {IUserData} from "ht-models";
 })
 export class AppComponent {
 
-  constructor(
-
-  ) {
+  constructor() {
 
   }
 
