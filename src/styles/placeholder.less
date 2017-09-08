@@ -220,7 +220,13 @@ a {
     text-decoration: none;
   }
 }
-
+@card-selected: #edeff1;
+@card-selected-2: #edeff1;
+.card.clickable {
+  &:hover {
+    background: @card-selected;
+  }
+}
 .clickable-card {
   cursor: pointer;
   z-index: 1;
@@ -312,7 +318,10 @@ a {
     border-top: 1px solid @ht-grey-2;
   }
   &-selected {
-    background: @ht-grey-1;
+    //color: #000;
+    background: @card-selected;
+    //background: darken(@card-selected, 3%);
+    //border-color: @ht-grey-5;
   }
 }
 
@@ -384,4 +393,35 @@ a {
 }
 .text-4 {
   font-size: 0.8em;
+}
+
+.text-capitalize {
+
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+//button
+.ht-btn {
+  display: flex;
+  align-items: center;
+  padding: 4px 13px;
+  border: 0;
+  background: rgb(255, 255, 255);
+  //border: 1px solid @ht-grey-5;
+  color: @ht-grey-5;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  &:focus {
+    background: lighten(@ht-grey-1, 5%);
+    outline: 0;
+  }
+
+  &-card {
+    &:hover{
+      background: @ht-blue;
+      color: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    }
+  }
 }

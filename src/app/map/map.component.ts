@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 import {HtMapService, HtUsersClientService} from "ht-angular-client";
 import {IUserData} from "ht-models";
 
@@ -14,6 +14,11 @@ export class MapComponent implements OnInit, AfterViewInit {
     private mapService: HtMapService,
     private userService: HtUsersClientService,
   ) { }
+
+  @HostListener('resize')
+  onMapResize() {
+    // todo this.mapService.map.resize();
+  }
 
   ngOnInit() {
 
