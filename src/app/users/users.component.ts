@@ -34,10 +34,10 @@ export class UsersComponent implements OnInit {
     const id = user.id;
     if (!this.hasMap) return 'detail';
 
-    if (id === this.loadingUserDataId && (!this.selectedUserId || !user.segments) ) {
-      return 'loading'
-    } else if (this.selectedUserId === user.id) {
+    if (this.selectedUserId === user.id) {
       return "close"
+    } else if (id === this.loadingUserDataId && (!this.selectedUserId || !user.segments) ) {
+      return 'loading'
     } else if (this.selectedUserDataId === user.id) {
       return 'detail';
     }  else {

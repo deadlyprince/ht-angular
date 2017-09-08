@@ -9,7 +9,9 @@ import {IUserData} from "ht-models";
 })
 export class MapContainerComponent implements OnInit {
   @Input() userId: string | null;
+  @Input() showLoading: boolean = true;
   subs = [];
+  loading$;
   constructor(
     private userClientService: HtUsersClientService,
     private mapService: HtMapService
@@ -17,6 +19,9 @@ export class MapContainerComponent implements OnInit {
 
   ngOnInit() {
     this.userClientService.placeline.initListener();
+    this.loading$ = this.userClientService.placeline.loadingObserver.data$()
+      .map((data) => !!data && this.showLoading)
+      .distinctUntilChanged();
 
     let sub = this.userClientService.placeline.data$.subscribe((userData: IUserData) => {
       if (userData) {

@@ -9,7 +9,7 @@ We recommend using `@angular/cli`, official Angular CLI tool for scaffolding ang
 #### Prerequisites
 ```shell
 npm i @angular/cli -g #install angular cli
-npm new ht-app #create new app called ht-app
+ng new ht-app #create new app called ht-app
 cd ht-app
 npm install  #install dependencies
 ```
@@ -42,8 +42,12 @@ import {HtModule} from "ht-angular-client";
 export class AppModule { }
 ````
 
+#### Setting up map
+
+`ht-angular` supports Leaflet.js and Google map js to render the map. One of these needs to be setup to use map feature. Argument of `HtModule.forRoot({})` takes `mapType` as a parameter. It's value can be `"google""` or `"leaflet"`.
+
 ### Usage
-To use any of the provided module, it needs to be imported in the `@ngModule` class where the component will be used. Then add the html-tag of the component where it needs to be rendered.
+To use any of the provided module, it needs to be imported in the `@NgModule` class where the component will be used. Then add the html-tag of the component where it needs to be rendered.
 
 #### Presentation Module
 These modules contain dumb components which do not have any HyperTrack client login. The are presentation component helpful in rendering already available HyperTrack entities
@@ -124,9 +128,9 @@ extends `HtActionsClientService` from `ht-client` library
 `ht-angular` library is a wrapper around bunch of other framework agnostic library. These libraries can be used to create similar library for any other framework. These are:
 1. `ht-models`: Contains HyperTrack entity interfaces
 2. `ht-utils`: Contains generic HyperTrack independent functions
-3. `ht-data`: Contains HyperTrack specific functions to process entities.
-4. `ht-map`: Contains helper functions to render HyperTrack specific or other map entities. Supports both google map and leaflet.
-5. `ht-client`: Contains api information of HyperTrack entities and provides function to fetch and update data.
+3. `ht-data`: Contains HyperTrack specific functions to process entities. Has `ht-utils` as dependency.
+4. `ht-map`: Contains helper functions to render HyperTrack specific or other map entities. Supports both google map and leaflet. Has `ht-utils` as dependency.
+5. `ht-client`: Contains api information of HyperTrack entities and provides function to fetch and update data. Has `ht-utils`, `ht-data` as dependencies.
 
 ### Development server
 

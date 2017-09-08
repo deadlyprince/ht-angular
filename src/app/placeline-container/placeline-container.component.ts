@@ -9,6 +9,7 @@ import {IUserData} from "ht-models";
 })
 export class PlacelineContainerComponent implements OnInit {
   @Input() userId: string | null;
+  @Input() showUserCard: boolean = true;
   userData$;
   constructor(
     private userClientService: HtUsersClientService,

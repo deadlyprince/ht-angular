@@ -36,7 +36,7 @@ import 'rxjs/add/observable/empty';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    HtModule.forRoot({token: 'sk_55fc65eb64c0b10300c54ff79ea3f6ef22981793', mapType: 'google'})
+    HtModule.forRoot({token: 'sk_55fc65eb64c0b10300c54ff79ea3f6ef22981793', mapType: 'leaflet'})
   ],
   providers: [],
   bootstrap: [AppComponent]
