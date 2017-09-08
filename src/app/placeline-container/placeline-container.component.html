@@ -1,0 +1,4 @@
+<div class="flex-column column-gap-10" *ngIf="userData$ | async as userData">
+  <ht-user-card [user]="userData"></ht-user-card>
+  <ht-placeline [userData]="userData"></ht-placeline>
+</div>

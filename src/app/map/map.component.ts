@@ -32,17 +32,17 @@ export class MapComponent implements OnInit, AfterViewInit {
     //   this.userService.placeline.setId("75db8dcb-6fc3-44d7-8533-e40c7ebb0a1f")
     // }, 12000)
 
-    this.userService.placeline.initListener();
-    this.userService.placeline.data$.subscribe((userData: IUserData) => {
-      // console.log(userData, "user Data map");
-      if (userData) {
-        this.mapService.tracePlaceline(userData);
-        this.mapService.resetBounds()
-      } else {
-        this.mapService.segmentTrace.trace(null, this.mapService.map)
-      }
-
-    });
+    // this.userService.placeline.initListener();
+    // this.userService.placeline.data$.subscribe((userData: IUserData) => {
+    //   // console.log(userData, "user Data map");
+    //   if (userData) {
+    //     this.mapService.tracePlaceline(userData);
+    //     this.mapService.resetBounds()
+    //   } else {
+    //     this.mapService.segmentTrace.trace(null, this.mapService.map)
+    //   }
+    //
+    // });
   }
 
   ngAfterViewInit() {

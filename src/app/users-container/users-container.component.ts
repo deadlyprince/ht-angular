@@ -18,6 +18,7 @@ export class UsersContainerComponent implements OnInit {
   selectedUserDataId$;
   loadingUserId$;
   loadingUserDataId$;
+  @Input() hasMap: boolean = false;
   constructor(
     private userService: HtUsersClientService,
     private mapService: HtMapService
