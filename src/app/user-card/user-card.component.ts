@@ -22,7 +22,7 @@ export class UserCardComponent implements OnInit, OnChanges {
   @Output() onAction = new EventEmitter();
   showStatus: boolean = true;
   hovered: boolean = false;
-  @HostBinding('class') role = 'card flex-column clickable';
+  @HostBinding('class') role = 'card flex-row clickable';
   @HostListener('mouseenter')
   hoverIn() {
     this.hovered = true;

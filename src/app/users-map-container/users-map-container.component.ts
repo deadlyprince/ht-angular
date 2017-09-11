@@ -8,7 +8,7 @@ import {HtMapService, HtUsersClientService} from "ht-angular-client";
   styleUrls: ['./users-map-container.component.less']
 })
 export class UsersMapContainerComponent implements OnInit {
-
+  @Input() hasPlaceline: boolean = true;
   constructor() {
 
   }

@@ -1,5 +1,9 @@
 @import "variables";
 
+//generic utils
+
+//text
+
 .text-center {
   text-align: center;
 }
@@ -12,6 +16,48 @@
 .text-left {
   text-align: left;
 }
+.text-1 {
+  font-size: 2em;
+}
+.text-4 {
+  font-size: 0.8em;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+
+.text-ontime {
+  color: darken(@ht-green, 13%);
+}
+
+.text-late {
+  color: @ht-red;
+}
+
+.text-warning {
+  color: @ht-red !important;
+}
+
+.text-red {
+  color: @ht-red;
+}
+
+.text-blue {
+  color: @ht-blue;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+//layouts
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -109,11 +155,6 @@
   border-radius: 50%;
 }
 
-
-.above {
-  z-index: 5;
-}
-
 .flex-half {
   flex-basis: 50%;
 
@@ -128,39 +169,6 @@
 
 .half {
   width: 50%;
-}
-.padding-left {
-
-}
-
-.text-ontime {
-  color: darken(@ht-green, 13%);
-}
-
-.text-late {
-  color: @ht-red;
-}
-
-.text-warning {
-  color: @ht-red !important;
-}
-
-.text-red {
-  color: @ht-red;
-}
-
-.text-blue {
-  color: @ht-blue;
-}
-
-.light-color {
-  color: @ht-grey-3;
-}
-
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .noselect {
@@ -220,6 +228,8 @@ a {
     text-decoration: none;
   }
 }
+
+//card
 @card-selected: #edeff1;
 @card-selected-2: #edeff1;
 .card.clickable {
@@ -319,17 +329,39 @@ a {
   }
   &-selected {
     //color: #000;
-    background: @card-selected;
+    box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.18);
+    z-index: 1;
     //background: darken(@card-selected, 3%);
     //border-color: @ht-grey-5;
   }
+  &-quick-action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    //background: @ht-grey-5;
+    //color: white;
+    border: 1px solid @ht-grey-border;
+    font-size: 0.8em;
+    padding: 5px 9px;
+    border-bottom-left-radius: 4px;
+    .element {
+      //display: none;
+      transform: scale(0);
+      width: 0;
+      transition: all 0.2s;
+    }
+    &:hover {
+      .element {
+        //display: flex;
+        width: 100%;
+        transform: scale(1);
+      }
+    }
+  }
 }
+//card end
 
 //loading
-.dropdown-header {
-  background: #ededed;
-  font-size: 14px;
-}
 .spinner-wave {
   margin: 0 auto;
   width: 100px;
@@ -388,19 +420,6 @@ a {
   }
 
 }
-.text-1 {
-  font-size: 2em;
-}
-.text-4 {
-  font-size: 0.8em;
-}
-
-.text-capitalize {
-
-}
-.text-uppercase {
-  text-transform: uppercase;
-}
 
 //button
 .ht-btn {
@@ -424,4 +443,58 @@ a {
       box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     }
   }
+}
+
+//activity class
+
+.stopped-color {
+  color: @stop;
+}
+.drive-color {
+  color: @trip;
+}
+.walk-color {
+  color: @trip;
+}
+.moving-color {
+  color: @trip;
+}
+.logged_off-color {
+  color: @no-info;
+}
+.network_offline-color {
+  color: @warning;
+}
+
+.location_disabled-color {
+  color: @warning;
+}
+
+.location_low_accuracy-color {
+  color: @warning;
+}
+
+.stopped-bg {
+  background: @stop;
+}
+.drive-bg {
+  background: @trip;
+}
+.walk-bg {
+  background: @trip;
+}
+.moving-bg {
+  background: @trip;
+}
+.logged_off-bg {
+  background: @no-info;
+}
+.network_offline-bg {
+  background: @warning;
+}
+.location_disabled-bg {
+  background-color: @warning;
+}
+.location_low_accuracy-bg {
+  background-color: @warning;
 }

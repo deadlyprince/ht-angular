@@ -22,6 +22,7 @@ import 'rxjs/add/operator/exhaustMap';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/pluck';
 
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/merge';
@@ -36,7 +37,8 @@ import 'rxjs/add/observable/empty';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    HtModule.forRoot({token: 'sk_55fc65eb64c0b10300c54ff79ea3f6ef22981793', mapType: 'leaflet'})
+    // HtModule.forRoot({token: 'sk_55fc65eb64c0b10300c54ff79ea3f6ef22981793', mapType: 'google'})
+    HtModule.forRoot({token: 'sk_35b9d87cba7ca206bcb7a06d5c94b24a58cdaac3', mapType: 'google'})
   ],
   providers: [],
   bootstrap: [AppComponent]
