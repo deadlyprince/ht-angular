@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {IUserData} from "ht-models";
-import {HtMapService, HtUsersClientService} from "ht-angular-client";
+import {HtClientService, HtMapService, HtUsersClientService} from "ht-angular-client";
 
 @Component({
   selector: 'ht-users-map-container',
@@ -9,12 +9,18 @@ import {HtMapService, HtUsersClientService} from "ht-angular-client";
 })
 export class UsersMapContainerComponent implements OnInit {
   @Input() hasPlaceline: boolean = true;
-  constructor() {
+  @Input() key: string;
+  constructor(
+    private clientService: HtClientService
+  ) {
 
   }
 
   ngOnInit() {
-
+    if (this.key) {
+      // console.log(this.key);
+      this.clientService.setToken(this.key)
+    }
   }
 
 }

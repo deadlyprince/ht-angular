@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {GroupTestComponent} from "./group-test.component";
 
 const routes: Routes = [
-  {path: ":id", component: GroupTestComponent}
+  {path: "", component: GroupTestComponent}
 ];
 
 @NgModule({
