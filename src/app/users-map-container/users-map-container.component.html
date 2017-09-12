@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="bar">
+  <div class="bar" [style.width.px]="sidebarWidth || 400">
     <ht-users-container [hasPlaceline]="hasPlaceline" [hasMap]="true"></ht-users-container>
   </div>
   <div class="flex">

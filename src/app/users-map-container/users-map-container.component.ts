@@ -10,6 +10,7 @@ import {HtClientService, HtMapService, HtUsersClientService} from "ht-angular-cl
 export class UsersMapContainerComponent implements OnInit {
   @Input() hasPlaceline: boolean = true;
   @Input() key: string;
+  @Input() sidebarWidth: number;
   constructor(
     private clientService: HtClientService
   ) {
