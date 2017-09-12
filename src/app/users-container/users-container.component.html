@@ -7,6 +7,7 @@
     [hasMap]="hasMap"
     (onAction)="onAction($event)"
     (onSelectUser)="selectUserCard($event)"
+    [showExtraBtn]="hasPlaceline"
     [users]="users$ | async"></ht-users>
   <ht-placeline-container [showUserCard]="false" *ngIf="(selectedUserId$ | async)"></ht-placeline-container>
   <!--<div *ngIf="(selectedUserId$ | async) && user$ | async as userData">-->

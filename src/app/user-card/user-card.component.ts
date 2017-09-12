@@ -4,16 +4,12 @@ import {
 } from '@angular/core';
 import {IUser, IUserAnalytics, IUserData} from "ht-models";
 import * as _ from "underscore";
-import {cardAction} from "../../animations/card";
 
 @Component({
   selector: 'ht-user-card',
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    cardAction
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserCardComponent implements OnInit, OnChanges {
   @Input() user: IUserData | IUserAnalytics | IUser;

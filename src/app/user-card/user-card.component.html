@@ -14,7 +14,7 @@
           <ht-battery-icon *ngIf="user.display.battery" [battery]="user.display.battery"></ht-battery-icon>
         </div>
       </ng-template>
-      <div class="flex-row text-4" *ngIf="!user.segments">
+      <div class="flex-row text-4" *ngIf="!user['segments']">
         <div>{{user.total_distance | distanceLocale}}</div>
         <div>&nbsp; &bull; &nbsp;</div>
         <div>{{user.total_duration | hmString:60}}</div>

@@ -40,16 +40,25 @@ export class MapContainerComponent implements OnInit {
 
     this.userClientService.analytics.initListener();
     this.userClientService.marks.initListener();
+
+    this.userClientService.marks.data$.subscribe((data) => {
+      console.log("unfil data", data);
+    })
     const marks$ = this.userClientService.usersMarkers$();
 
-    this.userClientService.marks.data$.pluck('isFirst').filter(data => !!data).subscribe((amrks) => {
-      this.mapService.resetBounds()
-    });
 
     marks$.subscribe((data) => {
       console.log("data", data);
       this.mapService.usersCluster.trace(data, this.mapService.map)
     })
+
+    this.userClientService.marks.data$.filter(data => !!data).pluck('isFirst').filter(data => !!data).subscribe((amrks) => {
+      this.mapService.resetBounds()
+    });
+  }
+
+  resetMap() {
+    this.mapService.resetBounds()
   }
 
 }
