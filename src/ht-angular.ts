@@ -20,6 +20,8 @@ import {PlacelineMapContainerModule} from "./app/placeline-map-container/placeli
 import {PlacelineMapContainerComponent} from "./app/placeline-map-container/placeline-map-container.component";
 import {UsersMapContainerModule} from "./app/users-map-container/users-map-container.module";
 import {UsersMapContainerComponent} from "./app/users-map-container/users-map-container.component";
+import { GroupKeyResolver} from "./app/guard/group-key-resolver";
+import { GroupLookupKeyResolver } from "./app/guard/group-lookup-key-resolver";
 
 export {
   UserCardComponent,
@@ -33,7 +35,8 @@ export {
   GroupsModule,
   GroupsContainerModule,
   MapContainerComponent,
-  MapContainerModule,MapModule,
+  MapContainerModule,
+  MapModule,
   SharedModule,
   PlacelineMapContainerComponent,
   PlacelineMapContainerModule,
@@ -42,6 +45,8 @@ export {
   PlacelineContainerModule,
   PlacelineContainerComponent,
   UsersMapContainerModule,
-  UsersMapContainerComponent
+  UsersMapContainerComponent,
+  GroupKeyResolver,
+  GroupLookupKeyResolver
 }
 

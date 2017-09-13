@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HtClientService} from "ht-angular-client";
-
+import * as _ from "underscore";
+import {IGroup} from "ht-models";
 @Component({
   selector: 'ht-groups-container',
   templateUrl: './groups-container.component.html',
@@ -8,13 +9,17 @@ import {HtClientService} from "ht-angular-client";
 })
 export class GroupsContainerComponent implements OnInit {
   groups$;
+  @Input() groupIdParam: string = 'id';
   constructor(
     private clientService: HtClientService
   ) { }
 
   ngOnInit() {
+    this.clientService.groups.list.setOptions({query: {}});
     this.clientService.groups.list.initListener();
-    this.groups$ = this.clientService.groups.list.dataArray$
+    this.groups$ = this.clientService.groups.list.dataArray$.map((groups) => {
+      return _.filter(groups, (group: IGroup) => !!group.lookup_id)
+    })
   }
 
 }

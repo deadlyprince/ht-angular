@@ -42,7 +42,7 @@ import {GroupKeyResolver} from "./guard/group-key-resolver";
     // HtModule.forRoot({token: 'sk_35b9d87cba7ca206bcb7a06d5c94b24a58cdaac3', mapType: 'google'}) //demo
     HtModule.forRoot({token: 'sk_ce9ec98a612847089acc26d952c964982c7535bd', mapType: 'google'}) // rescue.fm
   ],
-  providers: [GroupKeyResolver],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

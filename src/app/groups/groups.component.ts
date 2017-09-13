@@ -8,6 +8,8 @@ import {IGroup} from "ht-models";
 })
 export class GroupsComponent implements OnInit {
   @Input() groups: IGroup[];
+  @Input() groupIdParam: string = 'id';
+
   constructor() { }
 
   ngOnInit() {

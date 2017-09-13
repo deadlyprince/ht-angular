@@ -9,6 +9,7 @@ import {HtClientService} from "ht-angular-client";
 })
 export class GroupTestComponent implements OnInit, OnDestroy {
   key$;
+  key;
   constructor(
     private route: ActivatedRoute,
     private clientService: HtClientService
@@ -17,13 +18,16 @@ export class GroupTestComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.clientService.clearData();
     this.clientService.setToken(null);
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log("init");
-    const key$ = this.clientService.groups.api.get(id).map((group) => {
-      console.log("group", group['token'], id);
-      return group['token']
-    });
-    this.key$ = key$
+    // const id = this.route.snapshot.paramMap.get('id');
+    // let data = this.route.snapshot.data;
+    this.key = this.route.snapshot.data['key']
+    // console.log(data, "data");
+    // console.log("init");
+    // const key$ = this.clientService.groups.api.get(id).map((group) => {
+    //   console.log("group", group['token'], id);
+    //   return group['token']
+    // });
+    // this.key$ = key$
     // console.log(this.route.snapshot.data, "data");
   }
 

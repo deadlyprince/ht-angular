@@ -6,15 +6,15 @@ import {HtClientService} from "ht-angular-client";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class GroupKeyResolver implements Resolve<any> {
+export class GroupLookupKeyResolver implements Resolve<any> {
 
   constructor(public clientService: HtClientService) {}
 
 
   resolve(next: ActivatedRouteSnapshot): Observable<any> {
     const id = next.paramMap.get('id');
-    const groupKey$ = this.clientService.groups.api.get(id).map((data: IGroup) => {
-      return data ? data.token : "test";
+    const groupKey$ = this.clientService.groups.api.index({lookup_id: id}).map((data: Page<IGroup>) => {
+      return data.results.length ? data.results[0].token : "test";
     });
 
     // return groupKey$.take(1)
