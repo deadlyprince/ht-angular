@@ -18,7 +18,7 @@ export class GroupsContainerComponent implements OnInit {
     this.clientService.groups.list.setOptions({query: {}});
     this.clientService.groups.list.initListener();
     this.groups$ = this.clientService.groups.list.dataArray$.map((groups) => {
-      return _.filter(groups, (group: IGroup) => !!group.lookup_id)
+      return _.filter(groups, (group: IGroup) => !!group[this.groupIdParam])
     })
   }
 
