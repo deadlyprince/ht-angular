@@ -5,6 +5,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 import * as _ from "underscore";
 import {htUser} from "ht-js-data";
+import {ApiType} from "ht-js-client";
 
 @Component({
   selector: 'ht-users-container',
@@ -21,6 +22,7 @@ export class UsersContainerComponent implements OnInit {
   loadingUserId$;
   loadingUserDataId$;
   @Input() hasMap: boolean = false;
+  @Input() apiType: ApiType = ApiType.analytics;
 
   constructor(
     private userService: HtUsersClientService,
@@ -28,57 +30,22 @@ export class UsersContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.usersPage$ = this.userService.analytics.getListener();
+    this.userService.options.listApiType = this.apiType;
+    this.usersPage$ = this.userService.list.getListener();
     if (this.hasPlaceline) {
       this.user$ = this.userService.placeline.getListener();
       this.users$ = this.userService.usersPlaceline$();
     } else {
-      this.users$ = this.userService.analytics.dataArray$
+      this.users$ = this.userService.list.dataArray$
     }
 
-    // this.user$ = this.userService.placeline.getListener();
-    // console.log(this.users$);
     this.loadingUserDataId$ = this.userService.placeline.loadingObserver.data$().distinctUntilChanged();
-    this.loadingUserId$ = this.userService.analytics.loadingObserver.data$().distinctUntilChanged();
+    this.loadingUserId$ = this.userService.list.loadingObserver.data$().distinctUntilChanged();
 
-    // Observable.combineLatest(
-    //   this.userService.placeline.loadingObserver.data$().distinctUntilChanged(),
-    //   this.userService.analytics.loadingObserver.data$().distinctUntilChanged(),
-    //   (loadingUserData, loadingUser) => {
-    //     // console.log(loadingUserData, loadingUser, "loading user");
-    //     return !!loadingUser || !!loadingUserData;
-    //   }
-    // ).subscribe((loading) => {
-    //   // console.log("loading", loading);
-    // })
 
-    // this.users$.subscribe((usersPage) => {
-    //   console.log(usersPage, "data");
-    // })
     this.selectedUserDataId$ = this.userService.placeline.idObservable.data$();
-    this.selectedUserId$ = this.userService.analytics.idObservable.data$();
+    this.selectedUserId$ = this.userService.list.idObservable.data$();
 
-
-
-
-    // this.userService.marks.getAll$((data, isFirst) => {
-    //
-    // }).subscribe((data) => {
-    //   console.log(data);
-    // });
-
-    // this.userService.
-
-    // console.log();
-    // let a = this.userService.analytics.getAll$((data) => {
-    //
-    // }, () => {
-    //
-    // });
-    // // console.log(this.userService.analytics);
-    // a.subscribe((d) => {
-    //   // console.log(d);
-    // })
   }
 
   clear() {
@@ -90,7 +57,7 @@ export class UsersContainerComponent implements OnInit {
   }
 
   onAction(payload) {
-    console.log(payload, payload['action']);
+    // console.log(payload, payload['action']);
     switch (payload['action']) {
       case "close":
         this.closeUser(payload.event);
@@ -133,14 +100,14 @@ export class UsersContainerComponent implements OnInit {
   closeUser(event) {
     event.stopPropagation()
     // this.userService.placeline.setId(null);
-    this.userService.analytics.setId(null)
+    this.userService.list.setId(null)
   }
 
 
   selectUser(user) {
     const id = user.id;
     // this.id.e.next(id)
-    this.userService.analytics.toggleId(user.id);
+    this.userService.list.toggleId(user.id);
     this.userService.placeline.setId(id);
     // this.id$.next(id)
     // this.userService.placeline.idObservable.e.next(user.id)

@@ -17,7 +17,7 @@ export class PlacelineMapContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userData$ = this.userClientService.placeline.getListener(this.userId).do((userData: IUserData) => {
+    this.userData$ = this.userClientService.placeline.getListener({id: this.userId}).do((userData: IUserData) => {
       if (userData) {
         this.mapService.tracePlaceline(userData);
         this.mapService.resetBounds()

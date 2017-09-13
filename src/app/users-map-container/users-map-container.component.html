@@ -1,8 +1,8 @@
 <div class="container">
   <div class="bar" [style.width.px]="sidebarWidth || 400">
-    <ht-users-container [hasPlaceline]="hasPlaceline" [hasMap]="true"></ht-users-container>
+    <ht-users-container [apiType]="apiType" [hasPlaceline]="hasPlaceline" [hasMap]="true"></ht-users-container>
   </div>
   <div class="flex">
-    <ht-map-container [showLoading]="false"></ht-map-container>
+    <ht-map-container [apiType]="apiType" [showLoading]="false"></ht-map-container>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HtMapService, HtUsersClientService} from "ht-angular-client";
 import {IUserData} from "ht-models";
+import {ApiType} from "ht-js-client";
 
 @Component({
   selector: 'ht-map-container',
@@ -12,12 +13,15 @@ export class MapContainerComponent implements OnInit {
   @Input() showLoading: boolean = true;
   subs = [];
   loading$;
+  @Input() apiType: ApiType = ApiType.analytics;
+
   constructor(
     private userClientService: HtUsersClientService,
     private mapService: HtMapService
   ) { }
 
   ngOnInit() {
+    this.userClientService.options.listApiType = this.apiType;
     this.userClientService.placeline.initListener();
     this.loading$ = this.userClientService.placeline.loadingObserver.data$()
       .map((data) => !!data && this.showLoading)
@@ -38,17 +42,14 @@ export class MapContainerComponent implements OnInit {
       this.userClientService.placeline.setId(this.userId)
     }
 
-    this.userClientService.analytics.initListener();
+    // this.userClientService.list.initListener();
     this.userClientService.marks.initListener();
 
-    this.userClientService.marks.data$.subscribe((data) => {
-      console.log("unfil data", data);
-    })
+
     const marks$ = this.userClientService.usersMarkers$();
 
 
     marks$.subscribe((data) => {
-      console.log("data", data);
       this.mapService.usersCluster.trace(data, this.mapService.map)
     })
 
