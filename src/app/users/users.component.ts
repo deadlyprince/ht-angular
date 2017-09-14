@@ -1,16 +1,24 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IUserAnalytics, IUserAnalyticsPage} from "ht-models";
+// import {entryLeaveTransition} from "../../animations/appear";
 // import {anim} from "../../animations/appear";
-// import {animate, style, transition, trigger} from "@angular/animations";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'ht-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // animations: [
-  //   entryLeaveTransition('card', {transform: 'translateX(-100px)', height: 0, opacity: 0}, '0.3s')
-  // ]
+  animations: [
+    trigger('card', [
+      transition(':enter', [
+        style({transform: 'translateX(-100px)', height: 0, opacity: 0}),
+        animate('0.3s' + ' ease-out')
+      ]),
+      transition(':leave', [
+        animate('0.3s' + ' ease-in', style({transform: 'translateX(-100px)', height: 0, opacity: 0}))
+      ])])
+  ]
 })
 export class UsersComponent implements OnInit {
   userCardAction;

@@ -12,6 +12,7 @@ export class UsersMapContainerComponent implements OnInit {
   @Input() key: string;
   @Input() sidebarWidth: number;
   @Input() apiType: ApiType = ApiType.analytics;
+  @Input() showFilter: boolean = true;
   constructor(
     private clientService: HtClientService
   ) {
