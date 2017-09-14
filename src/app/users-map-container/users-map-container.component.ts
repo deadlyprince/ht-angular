@@ -20,7 +20,6 @@ export class UsersMapContainerComponent implements OnInit {
 
   ngOnInit() {
     if (this.key) {
-      // console.log(this.key);
       this.clientService.setToken(this.key)
     }
   }

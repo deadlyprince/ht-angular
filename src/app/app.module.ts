@@ -39,8 +39,8 @@ import {GroupKeyResolver} from "./guard/group-key-resolver";
     HttpClientModule,
     BrowserAnimationsModule,
     // HtModule.forRoot({token: 'sk_55fc65eb64c0b10300c54ff79ea3f6ef22981793', mapType: 'google'})
-    // HtModule.forRoot({token: 'sk_35b9d87cba7ca206bcb7a06d5c94b24a58cdaac3', mapType: 'google'}) //demo
-    HtModule.forRoot({token: 'sk_ce9ec98a612847089acc26d952c964982c7535bd', mapType: 'google'}) // rescue.fm
+    HtModule.forRoot({token: 'sk_35b9d87cba7ca206bcb7a06d5c94b24a58cdaac3', mapType: 'google'}) //demo
+    // HtModule.forRoot({token: 'sk_ce9ec98a612847089acc26d952c964982c7535bd', mapType: 'google'}) // rescue.fm
   ],
   providers: [],
   bootstrap: [AppComponent]
