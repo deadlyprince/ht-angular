@@ -24,4 +24,13 @@ export class PlacelineContainerComponent implements OnInit {
     }
   }
 
+  onSegmentId(segmentId: string) {
+    // console.log(segmentId, "segmentId");
+    this.userClientService.placeline.segmentIdObserver.setSegmentId(segmentId)
+  }
+
+  onSelectSegmentId(segmentId: string) {
+
+  }
+
 }
