@@ -22,20 +22,21 @@ export class MapContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.userClientService.mapClass = this.mapService; // todo handle this from ht-angular-client
     this.userClientService.options.listApiType = this.apiType;
     this.userClientService.placeline.initListener();
     this.loading$ = this.userClientService.placeline.loadingObserver.data$()
       .map((data) => !!data && this.showLoading)
       .distinctUntilChanged();
 
-    const sub = this.userClientService.placeline.data$.subscribe((userData: IUserData) => {
-      if (userData) {
-        this.mapService.tracePlaceline(userData);
-        this.mapService.resetBounds()
-      } else {
-        this.mapService.segmentTrace.trace(null, this.mapService.map)
-      }
-    })
+    // const sub = this.userClientService.placeline.data$.subscribe((userData: IUserData) => {
+      // if (userData) {
+      //   this.mapService.tracePlaceline(userData);
+      //   this.mapService.resetBounds()
+      // } else {
+      //   this.mapService.segmentTrace.trace(null, this.mapService.map)
+      // }
+    // });
       // .map((data) => !!data)
       // .distinctUntilChanged()
       // .subscribe((hasPlaceline: boolean) => {
@@ -43,11 +44,11 @@ export class MapContainerComponent implements OnInit {
       //   // this.mapService.resetBounds();
       // });
 
-    const sub2 = this.userClientService.placeline.idObservable.data$().distinctUntilChanged()
-      .subscribe((userId) => {
-        // this.userClientService.marks.setFilter((user) => !userId);
-        this.mapService.resetBounds();
-      });
+    // const sub2 = this.userClientService.placeline.idObservable.data$().distinctUntilChanged()
+    //   .subscribe((userId) => {
+    //     // this.userClientService.marks.setFilter((user) => !userId);
+    //     this.mapService.resetBounds();
+    //   });
 
     // let sub2 = this.userClientService.placeline.data$.share()
     //   .map((data) => !!data)
@@ -62,7 +63,7 @@ export class MapContainerComponent implements OnInit {
     // })
 
 
-    this.subs.push(sub, sub2);
+    // this.subs.push(sub, sub2);
 
     if (this.userId) {
       this.userClientService.placeline.setId(this.userId)
@@ -72,16 +73,16 @@ export class MapContainerComponent implements OnInit {
     this.userClientService.marks.initListener();
 
 
-    const marks$ = this.userClientService.usersMarkers$();
-
-
-    marks$.subscribe((data) => {
-      this.mapService.usersCluster.trace(data, this.mapService.map)
-    });
-
-    this.userClientService.marks.data$.filter(data => !!data).pluck('isFirst').filter(data => !!data).subscribe((amrks) => {
-      this.mapService.resetBounds()
-    });
+    // const marks$ = this.userClientService.usersMarkers$();
+    //
+    //
+    // marks$.subscribe((data) => {
+    //   this.mapService.usersCluster.trace(data, this.mapService.map)
+    // });
+    //
+    // this.userClientService.marks.data$.filter(data => !!data).pluck('isFirst').filter(data => !!data).subscribe((amrks) => {
+    //   this.mapService.resetBounds()
+    // });
   }
 
   resetMap$() {
