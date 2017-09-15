@@ -28,17 +28,24 @@ export class MapContainerComponent implements OnInit {
       .map((data) => !!data && this.showLoading)
       .distinctUntilChanged();
 
-    let sub = this.userClientService.placeline.data$.do((userData: IUserData) => {
+    const sub = this.userClientService.placeline.data$.subscribe((userData: IUserData) => {
       if (userData) {
         this.mapService.tracePlaceline(userData);
-        // this.mapService.resetBounds()
+        this.mapService.resetBounds()
       } else {
         this.mapService.segmentTrace.trace(null, this.mapService.map)
       }
-    }).map((data) => !!data)
-      .distinctUntilChanged()
-      .subscribe((hasPlaceline: boolean) => {
-        this.userClientService.marks.setFilter((user) => !hasPlaceline);
+    })
+      // .map((data) => !!data)
+      // .distinctUntilChanged()
+      // .subscribe((hasPlaceline: boolean) => {
+      //   // this.userClientService.marks.setFilter((user) => !hasPlaceline);
+      //   // this.mapService.resetBounds();
+      // });
+
+    const sub2 = this.userClientService.placeline.idObservable.data$().distinctUntilChanged()
+      .subscribe((userId) => {
+        // this.userClientService.marks.setFilter((user) => !userId);
         this.mapService.resetBounds();
       });
 
@@ -55,7 +62,7 @@ export class MapContainerComponent implements OnInit {
     // })
 
 
-    this.subs.push(sub);
+    this.subs.push(sub, sub2);
 
     if (this.userId) {
       this.userClientService.placeline.setId(this.userId)
