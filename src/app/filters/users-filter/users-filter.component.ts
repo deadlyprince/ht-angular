@@ -37,7 +37,7 @@ export class UsersFilterComponent implements OnInit {
     this.statusFiltes = this.usersClientService.filterClass.statusQueryArray;
     this.sortingLabels = this.usersClientService.filterClass.sortingQueryLabel;
     this.ordering$ = this.usersClientService.ordering$;
-    // this.showFilter$ = this.usersClientService.list.id$.map((id) => !id ? 'show' : 'hide');
+    this.showFilter$ = this.usersClientService.list.id$.map((id) => !id ? 'show' : 'hide');
   }
 
   onQuery(query) {
