@@ -26,7 +26,6 @@ export class UsersComponent implements OnInit {
   @Input() selectedUserId: string | null;
   @Input() selectedUserDataId: string | null;
   @Input() loadingUserDataId: string | null;
-  @Input() loadingUserId: string | null;
   @Input() hasMap: boolean = false;
   @Input() showExtraBtn: boolean = true;
   @Output() onSelectUser: EventEmitter<string | null> = new EventEmitter();

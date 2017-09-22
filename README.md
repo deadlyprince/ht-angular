@@ -14,6 +14,31 @@ cd ht-app
 npm install  #install dependencies
 ```
 
+#### Map prerequisits
+
+This library supports rendering both google maps and open-street maps using leaflet.js. Based on the map type of your choice appropriate libraries needs to be loaded
+
+```
+npm i @types/googlemaps # for google maps
+npm i @types/leaflet leaflet #for leaflet
+``` 
+
+In `index.html` you also need to add the following scripts
+
+```html
+<!--google map scripts-->
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<KEY>&libraries=geometry"></script>
+<!--google maps script end-->
+<!--leaflet stylesheet-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+        crossorigin=""/>
+<!--leaflet stylesheet end-->
+```
+
+In you `app.module.ts` add `require("leaflet)` to import leaflet.
+
 #### Dependencies
 Install ht-angular packages
 ```
@@ -70,6 +95,7 @@ These module contain components which fetches the data based on the input parame
 |PlacelineMapModule   | ht-placeline-map-container   | userId: string   |
 |UsersMapModule   | ht-users-map-container   | query: object   |
 
+
 #### Example
 ```html
 <!--test.component.html-->
@@ -78,12 +104,12 @@ These module contain components which fetches the data based on the input parame
 ```typescript
 //test.module.ts
 import { TestComponent } from './test.component';
-import {UsersModule} from "ht-angular";
+import {UsersContainerModule} from "ht-angular";
 
 @NgModule({
   imports: [
     CommonModule,
-    UsersModule
+    UsersContainerModule
   ],
   declarations: [TestComponent]
 })
@@ -101,6 +127,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
+  /**
+  * this userId is passed as an input to users container
+  */
   userId = "<USER_ID>";
 
   constructor() { }
@@ -108,6 +137,10 @@ export class TestComponent implements OnInit {
   ngOnInit() {
   }
 }
+```
+
+```html
+<ht-users-container [userId]="userId"></ht-users-container>
 ```
 
 ### Service

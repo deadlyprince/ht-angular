@@ -10,6 +10,7 @@ import {IUserData} from "ht-models";
 export class PlacelineMapContainerComponent implements OnInit {
 
   @Input() userId: string | null;
+  @Input() showSidebar: boolean = true;
   userData$;
   constructor(
     private userClientService: HtUsersClientService,
@@ -17,18 +18,19 @@ export class PlacelineMapContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userData$ = this.userClientService.placeline.getListener({id: this.userId}).do((userData: IUserData) => {
-      if (userData) {
-        this.mapService.tracePlaceline(userData);
-        this.mapService.resetBounds()
-      } else {
-        this.mapService.segmentTrace.trace(null, this.mapService.map)
-      }
-    });
+    this.userClientService.placeline.setId(this.userId);
+    // this.userData$ = this.userClientService.getUserData().do((userData: IUserData) => {
+    //   if (userData) {
+    //     this.mapService.tracePlaceline(userData);
+    //     this.mapService.resetBounds()
+    //   } else {
+    //     this.mapService.segmentTrace.trace(null, this.mapService.map)
+    //   }
+    // });
 
-    if (this.userId) {
-      this.userClientService.placeline.setId(this.userId)
-    }
+    // if (this.userId) {
+    //   this.userClientService.placeline.setId(this.userId)
+    // }
   }
 
 }

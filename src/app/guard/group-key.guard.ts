@@ -12,13 +12,15 @@ export class GroupKeyGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const id = next.paramMap.get('id');
     console.log(next);
-    const key = this.clientService.groups.item.getListener({id}).map((group: IGroup) => {
-      console.log("group", group);
-      // next.data = {token: next.paramMap.get('id')};
-      return group['token']
-    }).take(1);
-    return key.map((data) => {
-      return true
-    });
+
+    // const key = this.clientService.groups.item.getListener({id}).map((group: IGroup) => {
+    //   console.log("group", group);
+    //   // next.data = {token: next.paramMap.get('id')};
+    //   return group['token']
+    // }).take(1);
+    // return key.map((data) => {
+    //   return true
+    // });
+    return true
   }
 }

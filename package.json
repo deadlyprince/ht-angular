@@ -15,7 +15,8 @@
     "e2e": "ng e2e",
     "dist": "rimraf dist && gulp build",
     "packagr": "ng-packagr -p ng-package.json",
-    "link": "gulp link"
+    "link": "gulp link",
+    "doc": "typedoc --out doc src/app"
   },
   "private": true,
   "dependencies": {
@@ -31,7 +32,7 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "ht-angular-client": "0.0.5",
-    "ht-js-client": "0.0.9",
+    "ht-js-client": "0.0.10",
     "ht-js-data": "0.0.21",
     "ht-js-map": "file:../ht-sdk/packages/map",
     "ht-js-utils": "0.0.13",
@@ -79,6 +80,7 @@
     "pump": "^1.0.2",
     "read-file": "^0.2.0",
     "rollup": "^0.41.6",
+    "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^2.0.1",
     "run-sequence": "^2.1.0",
     "ts-node": "~3.2.0",

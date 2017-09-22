@@ -33,19 +33,19 @@ export class UsersFilterComponent implements OnInit {
 
   ngOnInit() {
     this.query$ = this.usersClientService.queryLabel$;
-    this.loading$ = this.usersClientService.list.loadingObserver.data$();
+    this.loading$ = this.usersClientService.list.loading$;
     this.statusFiltes = this.usersClientService.filterClass.statusQueryArray;
     this.sortingLabels = this.usersClientService.filterClass.sortingQueryLabel;
     this.ordering$ = this.usersClientService.ordering$;
-    this.showFilter$ = this.usersClientService.list.idObservable.data$().map((id) => !id ? 'show' : 'hide');
+    // this.showFilter$ = this.usersClientService.list.id$.map((id) => !id ? 'show' : 'hide');
   }
 
   onQuery(query) {
-    this.usersClientService.list.queryObserver.updateData(query)
+    this.usersClientService.list.updateQuery(query)
   }
 
   clearQuery(key) {
-    this.usersClientService.list.queryObserver.clearQueryKey(key)
+    this.usersClientService.list.clearQueryKey(key)
   }
 
   setStatus(key, event) {

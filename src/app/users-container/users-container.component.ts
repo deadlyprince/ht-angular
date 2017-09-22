@@ -4,7 +4,7 @@ import {IUserAnalytics, IUserData} from "ht-models";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Observable} from "rxjs/Observable";
 import * as _ from "underscore";
-import {htUser} from "ht-js-data";
+// import {htUser} from "ht-js-data";
 import {ApiType} from "ht-js-client";
 
 @Component({
@@ -30,22 +30,22 @@ export class UsersContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.options.listApiType = this.apiType;
-    this.usersPage$ = this.userService.list.getListener();
+    this.userService.list.setApiType(this.apiType);
+    this.userService.list.setActive();
     if (this.hasPlaceline) {
-      this.user$ = this.userService.placeline.getListener();
-      this.users$ = this.userService.usersPlaceline$();
+      // this.user$ = Observable.empty();
+      this.user$ = this.userService.placeline.data$;
+      this.users$ = this.userService.placelineOrList$();
     } else {
-      this.users$ = this.userService.list.dataArray$
+      this.users$ = this.userService.list.dataArray$;
     }
 
-    this.loadingUserDataId$ = this.userService.placeline.loadingObserver.data$().distinctUntilChanged();
-    this.loadingUserId$ = this.userService.list.loadingObserver.data$().distinctUntilChanged();
+    this.loadingUserDataId$ = this.userService.placeline.loading$.distinctUntilChanged();
+    // this.loadingUserId$ = this.userService.list.loading$.distinctUntilChanged();
 
 
-    this.selectedUserDataId$ = this.userService.placeline.idObservable.data$();
-    this.selectedUserId$ = this.userService.list.idObservable.data$();
-
+    this.selectedUserDataId$ = this.userService.placeline.id$;
+    this.selectedUserId$ = this.userService.list.id$;
   }
 
   clear() {
@@ -98,34 +98,20 @@ export class UsersContainerComponent implements OnInit {
   }
 
   closeUser(event) {
-    event.stopPropagation()
-    // this.userService.placeline.setId(null);
+    event.stopPropagation();
     this.userService.list.setId(null)
   }
 
 
   selectUser(user) {
     const id = user.id;
-    // this.id.e.next(id)
-    this.userService.list.toggleId(user.id);
+    this.userService.list.toggleId(id);
     this.userService.placeline.setId(id);
-    // this.id$.next(id)
-    // this.userService.placeline.idObservable.e.next(user.id)
-    // this.id.next(user.id)
-    // this.userService.analytics.setId(user.id)
-
-    // this.filteredUser
-    // this.user$.do((userData: IUserData) => {
-    //   console.log(userData);
-    //   this.mapService.tracePlaceline(userData);
-    //   this.mapService.resetBounds()
-    // })
 
   };
 
   selectUserData(userData: IUserData, event) {
     const id = userData.id;
-    // this.id.e.next(id)
     event.stopPropagation();
     this.userService.placeline.toggleId(id);
   }

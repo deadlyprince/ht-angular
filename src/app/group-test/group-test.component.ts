@@ -16,11 +16,12 @@ export class GroupTestComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.clientService.clearData();
-    this.clientService.setToken(null);
+    // this.clientService.clearData();
     // const id = this.route.snapshot.paramMap.get('id');
     // let data = this.route.snapshot.data;
-    this.key = this.route.snapshot.data['key']
+    const key = this.route.snapshot.data['key'];
+    this.clientService.setToken(key);
+    this.key = key;
     // console.log(data, "data");
     // console.log("init");
     // const key$ = this.clientService.groups.api.get(id).map((group) => {
@@ -32,7 +33,7 @@ export class GroupTestComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.clientService.groups.item.setId(null)
+    // this.clientService.groups.item.setId(null)
   }
 
 }

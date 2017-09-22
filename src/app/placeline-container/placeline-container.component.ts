@@ -16,7 +16,7 @@ export class PlacelineContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.userClientService.placeline.initListener();
+      // this.userClientService.placeline.initListener();
       this.userData$ = this.userClientService.placeline.data$;
 
     if (this.userId) {
@@ -26,7 +26,7 @@ export class PlacelineContainerComponent implements OnInit {
 
   onSegmentId(segmentId: string) {
     // console.log(segmentId, "segmentId");
-    this.userClientService.placeline.segmentIdObserver.setSegmentId(segmentId)
+    this.userClientService.placeline.setSegmentSelectedId(segmentId);
   }
 
   onSelectSegmentId(segmentId: string) {

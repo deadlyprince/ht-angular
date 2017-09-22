@@ -50,6 +50,8 @@ const gulpRollup = require('gulp-better-rollup');
 const rollupNodeResolve = require('rollup-plugin-node-resolve');
 const rollupUglify = require('rollup-plugin-uglify');
 
+const rollup = require('rollup');
+const rollupTypescript = require('rollup-plugin-typescript');
 
 const LIBRARY_NAME = 'ht-angular';
 
@@ -266,7 +268,7 @@ startKarmaServer(true, false, cb);
 
 // Prepare 'dist' folder for publication to NPM
 gulp.task('package', (cb) => {
-  let pkgJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+  let pkgJson = JSON.parse(fs.readFileSync('./src/package.json', 'utf8'));
 let targetPkgJson = {};
 let fieldsToCopy = ['version', 'description', 'keywords', 'author', 'repository', 'license', 'bugs', 'homepage'];
 
@@ -332,12 +334,13 @@ gulp.task('bundle', () => {
     'rxjs/add/operator/startWith': 'Rx.Observable.prototype',
     'rxjs/add/operator/switchMap': 'Rx.Observable.prototype',
     'rxjs/Observable': 'Rx',
-    'underscore': "_"
+    'underscore': "_",
+    'moment-mini': "moment"
   };
 
 const rollupOptions = {
   context: 'this',
-  // external: Object.keys(globals),
+  external: Object.keys(globals),
   plugins: [
     // rollupNodeResolve({ module: true }),
     rollupUglify()

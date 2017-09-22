@@ -15,11 +15,13 @@ export class GroupsContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.clientService.groups.list.setOptions({query: {}});
-    this.clientService.groups.list.initListener();
-    this.groups$ = this.clientService.groups.list.dataArray$.map((groups) => {
-      return _.filter(groups, (group: IGroup) => !!group[this.groupIdParam])
-    })
+    this.clientService.groups.list.setActive();
+    this.groups$ = this.clientService.groups.list.dataArray$;
+    // this.clientService.groups.list.setOptions({query: {}});
+    // this.clientService.groups.list.initListener();
+    // this.groups$ = this.clientService.groups.list.dataArray$.map((groups) => {
+    //   return _.filter(groups, (group: IGroup) => !!group[this.groupIdParam])
+    // })
   }
 
 }

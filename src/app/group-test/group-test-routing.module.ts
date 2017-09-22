@@ -5,7 +5,7 @@ import {GroupKeyResolver} from "../guard/group-key-resolver";
 import {GroupLookupKeyResolver} from "../guard/group-lookup-key-resolver";
 
 const routes: Routes = [
-  {path: "", component: GroupTestComponent, resolve: {key: GroupLookupKeyResolver}}
+  {path: "", component: GroupTestComponent, resolve: {key: GroupKeyResolver}}
 ];
 
 @NgModule({

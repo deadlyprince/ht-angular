@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HtUsersClientService} from "ht-angular-client";
-import * as moment from 'moment-mini'
+// import * as moment from 'moment-mini'
+import moment from 'moment-mini'
 import {IDateRange} from "ht-js-client";
 
 @Component({
