@@ -106,7 +106,8 @@ export class UsersContainerComponent implements OnInit {
   selectUser(user) {
     const id = user.id;
     this.userService.list.toggleId(id);
-    this.userService.placeline.setId(id);
+    this.userService.placeline.toggleId(id);
+    // this.userService.placeline.setId(id);
 
   };
 
