@@ -21,6 +21,7 @@ export class UsersContainerComponent implements OnInit {
   selectedUserDataId$;
   loadingUserId$;
   loadingUserDataId$;
+  loadingUsers$;
   @Input() hasMap: boolean = false;
   @Input() apiType: ApiType = ApiType.analytics;
 
@@ -39,6 +40,7 @@ export class UsersContainerComponent implements OnInit {
     } else {
       this.users$ = this.userService.list.dataArray$;
     }
+    this.loadingUsers$ = this.userService.list.loading$;
 
     this.loadingUserDataId$ = this.userService.placeline.loading$.distinctUntilChanged();
     // this.loadingUserId$ = this.userService.list.loading$.distinctUntilChanged();

@@ -6,6 +6,8 @@ import {PlacelineModule} from "../placeline/placeline.module";
 import {SharedModule} from "../shared/shared.module";
 import {UserCardModule} from "../user-card/user-card.module";
 import {PlacelineContainerModule} from "../placeline-container/placeline-container.module";
+import {UsersSummaryModule} from "../users-summary/users-summary.module";
+import {UsersSummaryContainerModule} from "../users-summary-container/users-summary-container.module";
 
 @NgModule({
   imports: [
@@ -14,7 +16,8 @@ import {PlacelineContainerModule} from "../placeline-container/placeline-contain
     // UserCardModule,
     PlacelineModule,
     PlacelineContainerModule,
-    SharedModule
+    SharedModule,
+    UsersSummaryContainerModule,
   ],
   declarations: [UsersContainerComponent],
   exports: [UsersContainerComponent]
