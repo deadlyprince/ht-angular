@@ -36,10 +36,16 @@ export class UsersContainerComponent implements OnInit {
     if (this.hasPlaceline) {
       // this.user$ = Observable.empty();
       this.user$ = this.userService.placeline.data$;
-      this.users$ = this.userService.placelineOrList$();
+      // this.users$ = this.userService.placelineOrList$();
+      this.usersPage$ = this.userService.listPage$();
     } else {
-      this.users$ = this.userService.list.dataArray$;
+      this.usersPage$ = this.userService.list.data$;
+      // this.users$ = this.userService.list.dataArray$;
     }
+    this.users$ = this.usersPage$.map((pageData) => {
+      return pageData ? pageData.results : pageData
+    });
+
     this.loadingUsers$ = this.userService.list.loading$;
 
     this.loadingUserDataId$ = this.userService.placeline.loading$.distinctUntilChanged();
