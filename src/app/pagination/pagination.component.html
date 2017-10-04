@@ -4,7 +4,7 @@
 <!--<p>Count: {{pageDate.count}}</p>-->
 <!--<p>Page: {{currentPage}}</p>-->
 <!--<p>Pages: {{pagesCount}}</p>-->
-<ng-container *ngIf="pagesCount > 1">
+<div class="pagination-container" *ngIf="pagesCount > 1">
   <div [class.disabled]="!pageDate.previous" (click)="onFetchPage(currentPage - 1)" class="pagination-element">
     <i class="fa fa-angle-left" aria-hidden="true"></i>
   </div>
@@ -34,5 +34,5 @@
   <div [class.disabled]="!pageDate.next" (click)="onFetchPage(currentPage + 1)" class="pagination-element">
     <i class="fa fa-angle-right" aria-hidden="true"></i>
   </div>
-</ng-container>
+</div>
 
