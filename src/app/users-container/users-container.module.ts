@@ -8,6 +8,7 @@ import {UserCardModule} from "../user-card/user-card.module";
 import {PlacelineContainerModule} from "../placeline-container/placeline-container.module";
 import {UsersSummaryModule} from "../users-summary/users-summary.module";
 import {UsersSummaryContainerModule} from "../users-summary-container/users-summary-container.module";
+import {PaginationModule} from "../pagination/pagination.module";
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {UsersSummaryContainerModule} from "../users-summary-container/users-summ
     PlacelineContainerModule,
     SharedModule,
     UsersSummaryContainerModule,
+    PaginationModule
   ],
   declarations: [UsersContainerComponent],
   exports: [UsersContainerComponent]

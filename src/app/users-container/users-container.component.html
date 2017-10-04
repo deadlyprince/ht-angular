@@ -18,4 +18,8 @@
   <div class="loading-box" *ngIf="loadingUsers$ | async">
 
   </div>
+  <ng-container *ngIf="usersPage$ | async as usersPage">
+    <ht-pagination (fetchPage)="fetchPage($event)" [pageDate]="usersPage"></ht-pagination>
+  </ng-container>
+
 </div>

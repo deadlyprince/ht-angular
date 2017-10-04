@@ -126,4 +126,8 @@ export class UsersContainerComponent implements OnInit {
     this.userService.placeline.toggleId(id);
   }
 
+  fetchPage(number) {
+    this.userService.list.updateQuery({page: number})
+  }
+
 }
