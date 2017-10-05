@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IUserListSummary} from "ht-models";
 
 @Component({
@@ -7,8 +7,8 @@ import {IUserListSummary} from "ht-models";
   styleUrls: ['./users-summary.component.less']
 })
 export class UsersSummaryComponent implements OnInit {
-
-  @Input() summary: IUserListSummary;
+  @Output() setQuery: EventEmitter<object> = new EventEmitter();
+  @Input() summary;
 
   constructor() { }
 
@@ -18,6 +18,11 @@ export class UsersSummaryComponent implements OnInit {
 
   indexId(index, item) {
     return item.label
+  }
+
+  setFilter(datum) {
+    const query = {status: datum.values.toString()};
+    this.setQuery.next(query)
   }
 
 }

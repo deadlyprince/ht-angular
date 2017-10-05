@@ -30,7 +30,7 @@ export class MapContainerComponent implements OnInit, AfterContentInit {
       .map((data) => !!data)
       .distinctUntilChanged();
 
-    this.loading$ = Observable.merge(loading$1, loading$2)
+    this.loading$ = Observable.merge(loading$1, loading$2);
 
   }
 

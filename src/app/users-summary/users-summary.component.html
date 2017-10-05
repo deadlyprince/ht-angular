@@ -3,6 +3,7 @@
   <div
     class="graph-label flex-row row-gap-10"
     [class.graph-active]="datum.selected"
+    (click)="setFilter(datum)"
     *ngFor="let datum of summary.chart; trackBy:indexId; let i = index">
     <!--<div class="box" [style.background-color]="datum.color"></div>-->
     <div class="flex-row flex space-between">

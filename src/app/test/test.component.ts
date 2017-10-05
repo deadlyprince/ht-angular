@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HtClientService, HtUsersClientService} from "ht-angular-client";
-
+import {QueryLabel} from "ht-js-client"
+import {Color} from "ht-js-utils";
 @Component({
   selector: 'ht-test',
   templateUrl: './test.component.html',
@@ -15,25 +16,10 @@ export class TestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.clientService.store.subscribe((state) => {
-    //   console.log("state", state);
-    // });
-    // // console.log(getUiAState);
-    // this.clientService.store.select(getUiAState).subscribe((a) => {
-    //   console.log("state a", a);
-    // })
-    // this.clientService.store.select(getUiAState).subscribe((a) => {
-    //   console.log("state a 2", a);
-    // })
+
+
   }
 
-  dispatchA() {
-    // this.clientService.store.dispatch({type: 'setA', payload: "Dasd"})
-  }
-
-  dispatchB() {
-    // this.clientService.store.dispatch({type: 'setB', payload: "ddsds"})
-  }
 
 }
 

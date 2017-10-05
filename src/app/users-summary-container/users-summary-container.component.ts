@@ -30,4 +30,8 @@ export class UsersSummaryContainerComponent implements OnInit {
 
   }
 
+  setQuery(query: object) {
+    this.usersClientService.list.updateQueryResetPage(query)
+  }
+
 }
