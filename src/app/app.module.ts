@@ -40,7 +40,7 @@ import {GroupKeyResolver} from "./guard/group-key-resolver";
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    HtModule.forRoot({token: 'sk_55fc65eb64c0b10300c54ff79ea3f6ef22981793', mapType: 'google'}) // demo
+    HtModule.forRoot({token: 'sk_ef6088bea97e5a12805be8eda32b8021ea02bfe5', mapType: 'google'}) // demo
   ],
   providers: [],
   bootstrap: [AppComponent]
