@@ -38,6 +38,9 @@ export class UsersContainerComponent implements OnInit {
       this.user$ = this.userService.placeline.data$;
       // this.users$ = this.userService.placelineOrList$();
       this.usersPage$ = this.userService.listPage$();
+      this.mapService.usersCluster.onClick = (data, marker) => {
+        this.selectUserCard(data)
+      }
     } else {
       this.usersPage$ = this.userService.list.data$;
       // this.users$ = this.userService.list.dataArray$;

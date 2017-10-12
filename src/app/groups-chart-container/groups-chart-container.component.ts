@@ -24,7 +24,7 @@ export class GroupsChartContainerComponent implements OnInit {
 
   ngOnInit() {
     // this.fillChildren("ecaec5e3-accb-4f77-a8bc-9dd54e38dc47")
-    this.fillChildren("87e4c882-e653-49b9-ac47-7558749292cf")
+    this.fillChildren()
     // this.groupService.getChildren("ecaec5e3-accb-4f77-a8bc-9dd54e38dc47").do((data: AllData<IGroup>) => {
     //   const totalCount = data.count;
     //   const currentCount = data ? Object.keys(data.resultsEntity).length : 0;
@@ -39,22 +39,21 @@ export class GroupsChartContainerComponent implements OnInit {
     // })
   }
 
-  fillChildren(id, level: number = 0) {
+  fillChildren(id?, level: number = 0) {
     this.clearTree(level);
     this.loading = true;
-    let groups$ = id ? this.groupService.getChildren(id) : this.groupService.getRoot();
-    this.groupService.getChildren(id).subscribe((data: AllData<IGroup>) => {
-      this.loading = false;
+    const groups$ = id ? this.groupService.getChildren(id) : this.groupService.getRoot();
+    groups$.subscribe((data: AllData<IGroup>) => {
       const totalCount = data.count;
       const currentCount = data ? Object.keys(data.resultsEntity).length : 0;
       this.progress = 100 * currentCount / totalCount;
       const isDone = data && !data.next;
       if (isDone) {
+        this.loading = false;
         this.progress = 100;
         let groups = _.values(data.resultsEntity);
         this.setGroups(groups, level)
       }
-      console.log("all groups", data);
     })
   }
 
@@ -66,7 +65,6 @@ export class GroupsChartContainerComponent implements OnInit {
     } else {
       this.groupsLevels[level] = groups;
     }
-    console.log(this.groupsLevels);
   }
 
   selectGroup(group, level, event) {
@@ -76,7 +74,6 @@ export class GroupsChartContainerComponent implements OnInit {
     // this.selectedGroups.splice(level, this.selectedGroups.length, id);
     this.selectedGroups[level] = id;
     level = +level + 1;
-    console.log('level', level, id);
     this.fillChildren(id, level)
   }
 
