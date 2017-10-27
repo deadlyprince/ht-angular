@@ -18,6 +18,7 @@ const tslint = require('gulp-tslint');
 /** Sass style */
 const postcss = require('postcss');
 const less = require('less');
+var gulpLess = require('gulp-less');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const scss = require('postcss-less');
@@ -232,6 +233,15 @@ pump(
 gulp.task('copy-style', (cb) => {
   return gulp.src('./src/styles/**/*.less')
     .pipe(gulpCopy('./dist'))
+    .pipe(gulpLess())
+    .pipe(gulp.dest('.'))
+
+})
+
+
+gulp.task('copy-js', (cb) => {
+  return gulp.src('./src/js/**/*.js')
+    .pipe(gulpCopy('./dist'))
     .pipe(gulp.dest('.'))
 
 })
@@ -396,7 +406,7 @@ gulp.task('watch', () => {
 
 // Build the 'dist' folder (without publishing it to NPM)
 gulp.task('build', ['clean'], (cb) => {
-  runSequence('compile', 'package', 'bundle', 'copy-style', cb);
+  runSequence('compile', 'package', 'bundle', 'copy-style', 'copy-js', cb);
 });
 
 // Build and then Publish 'dist' folder to NPM
