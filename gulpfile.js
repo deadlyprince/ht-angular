@@ -233,8 +233,16 @@ pump(
 gulp.task('copy-style', (cb) => {
   return gulp.src('./src/styles/**/*.less')
     .pipe(gulpCopy('./dist'))
+    // .pipe(gulpLess())
+    .pipe(gulp.dest('./dist/less'))
+
+})
+
+gulp.task('compile-style', (cb) => {
+  return gulp.src('./src/styles.less')
+    // .pipe(gulpCopy('.'))
     .pipe(gulpLess())
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest('./dist/styles'))
 
 })
 
@@ -242,7 +250,7 @@ gulp.task('copy-style', (cb) => {
 gulp.task('copy-js', (cb) => {
   return gulp.src('./src/js/**/*.js')
     .pipe(gulpCopy('./dist'))
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest('./dist/js'))
 
 })
 
@@ -406,7 +414,7 @@ gulp.task('watch', () => {
 
 // Build the 'dist' folder (without publishing it to NPM)
 gulp.task('build', ['clean'], (cb) => {
-  runSequence('compile', 'package', 'bundle', 'copy-style', 'copy-js', cb);
+  runSequence('compile', 'package', 'bundle', 'copy-style', 'copy-js', 'compile-style', cb);
 });
 
 // Build and then Publish 'dist' folder to NPM
