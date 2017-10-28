@@ -4,7 +4,7 @@
     "entryFile": "public_api.ts",
     "externals": [
       "ht-maps",
-      "ht-utility",
+      "ht-utility"
     ]
   }
 }

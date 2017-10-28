@@ -19,7 +19,7 @@ var MAP_TYPE = new InjectionToken('app.mapType');
  * @return {?}
  */
 export function clientServiceFactory(request) {
-  return new HtClient(request);
+  return new HtClientService(request);
 }
 
 /**
@@ -88,31 +88,6 @@ export function forModuleRoot (config): ModuleWithProviders {
 })
 export class HtModule {
   static forRoot = forModuleRoot
-  // static forRoot = (config): ModuleWithProviders => {
-  //   return {
-  //     ngModule: HtModule,
-  //     providers: [
-  //       HttpClient,
-  //       { provide: 'MAP_TYPE', useValue: config.mapType },
-  //       { provide: HtMapService, useFactory: mapServiceFactory, deps: ['MAP_TYPE'] },
-  //       { provide: 'TOKEN', useValue: config.token },
-  //       { provide: HtRequestService,
-  //         useFactory: requestServiceFactory,
-  //         deps: [HttpClient, 'TOKEN']
-  //       },
-  //       { provide: HtClientService,
-  //         useFactory: clientServiceFactory,
-  //         deps: [HtRequestService]
-  //       },
-  //       {
-  //         provide: HtUsersService,
-  //         useFactory: userClientServiceFactory,
-  //         deps: [HtClientService]
-  //       },
-  //
-  //     ]
-  //   };
-  // };
 }
 
 

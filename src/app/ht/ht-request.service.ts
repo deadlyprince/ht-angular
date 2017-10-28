@@ -13,19 +13,13 @@ export class HtRequestService extends HtRequest {
   }
 
   getObservable<T>(url, options: object = {}) {
-    console.log("here, ng");
-    // return Observable.of({});
     let obj = super.headerObj();
-    let headers = new HttpHeaders(obj)
+    let headers = new HttpHeaders(obj);
     return this.http.get<T>(url, {headers});
   }
 
 
   postObservable(url, body, options: object = {}) {
     return Observable.of({});
-  }
-
-  test() {
-    return ""
   }
 }

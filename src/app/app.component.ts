@@ -28,7 +28,7 @@ export class AppComponent {
         color: Color.red
       },
     ];
-    this.htUsersClientService.statusQueryArray = queryMap
+    // this.htUsersClientService.statusQueryArray = queryMap
   }
 
 
