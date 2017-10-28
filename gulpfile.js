@@ -288,7 +288,7 @@ startKarmaServer(true, false, cb);
 gulp.task('package', (cb) => {
   let pkgJson = JSON.parse(fs.readFileSync('./src/package.json', 'utf8'));
 let targetPkgJson = {};
-let fieldsToCopy = ['version', 'description', 'keywords', 'author', 'repository', 'license', 'bugs', 'homepage'];
+let fieldsToCopy = ['version', 'description', 'keywords', 'author', 'repository', 'license', 'bugs', 'homepage', 'dependencies', 'peerDependencies'];
 
 targetPkgJson['name'] = LIBRARY_NAME;
 
