@@ -232,7 +232,7 @@ pump(
 
 gulp.task('copy-style', (cb) => {
   return gulp.src('./src/styles/**/*.less')
-    .pipe(gulpCopy('./dist'))
+    // .pipe(gulpCopy('./dist'))
     // .pipe(gulpLess())
     .pipe(gulp.dest('./dist/less'))
 
@@ -242,14 +242,14 @@ gulp.task('compile-style', (cb) => {
   return gulp.src('./src/styles.less')
     // .pipe(gulpCopy('.'))
     .pipe(gulpLess())
-    .pipe(gulp.dest('./dist/styles'))
+    .pipe(gulp.dest('./dist/css'))
 
 })
 
 
 gulp.task('copy-js', (cb) => {
   return gulp.src('./src/js/**/*.js')
-    .pipe(gulpCopy('./dist'))
+    // .pipe(gulpCopy('./dist/js'))
     .pipe(gulp.dest('./dist/js'))
 
 })
