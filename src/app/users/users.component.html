@@ -1,7 +1,7 @@
-<div class="flex-column card-stack" *ngIf="users">
+<div class="card-stack" *ngIf="users">
   <ht-user-card
     [@card]
-    class="flex-row"
+    class="flex-row card is-marginless"
     [class.card-selected]="selectedUserDataId == user.id"
     [action]="getAction(user)" (onAction)="onAction.next($event)"
     (click)="onSelectUser.next(user)"

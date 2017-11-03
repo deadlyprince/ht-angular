@@ -228,24 +228,24 @@ a {
 //card
 $card-selected: #edeff1;
 $card-selected-2: #edeff1;
-.card.clickable {
+.ht-card.clickable {
   &:hover {
     background: $card-selected;
   }
 }
-.clickable-card {
-  cursor: pointer;
-  z-index: 1;
-  &:hover {
-    //box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.16);
-    background: #fafafa;
-  }
-  &:active {
-    top: 1px;
-  }
-}
+//.clickable-card {
+//  cursor: pointer;
+//  z-index: 1;
+//  &:hover {
+//    //box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.16);
+//    background: #fafafa;
+//  }
+//  &:active {
+//    top: 1px;
+//  }
+//}
 
-.card-container {
+.ht-card-container {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -288,7 +288,7 @@ $card-selected-2: #edeff1;
   display: none !important;
 }
 
-.card {
+.ht-card {
   color: $ht-grey-5;
   background: #fff;
   border: 0.4px solid $ht-grey-border-light;
@@ -357,8 +357,8 @@ $card-selected-2: #edeff1;
   }
 }
 
-.card-stack {
-  .card {
+.ht-card-stack {
+  .ht-card {
     border-bottom-width: 0;
     &:last-child {
       border-bottom-width: 0.4px;
@@ -571,6 +571,8 @@ $card-selected-2: #edeff1;
     text-align: right;
   }
 }
+
+
 
 //all browsers
 input, textarea, select, button {

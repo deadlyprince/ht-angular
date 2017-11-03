@@ -1,6 +1,6 @@
-<div class="ht-btn flex-row">
-  <input #query (input)="test(query.value)" (keydown.enter)="setSearch(query)" type="text" class="input-search" placeholder="Search {{entity}}">
-  <span class="input-group-btn" (click)="setSearch(query)">
+<div class="control has-icons-right flex-row">
+  <input #query (input)="test(query.value)" (keydown.enter)="setSearch(query)" type="text" class="input" placeholder="Search {{entity}}">
+  <span class="icon is-right" (click)="setSearch(query)">
         <i class="fa fa-search"></i>
       </span>
 </div><!-- /input-group -->
