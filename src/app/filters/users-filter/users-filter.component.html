@@ -1,4 +1,4 @@
-<div class="filter-container" [@filter]="showFilter$ | async">
+<div class="filter-container flex-column" [@filter]="showFilter$ | async">
   <ht-entity-search (onSearchQuery)="onQuery($event)"></ht-entity-search>
   <div class="dropdown" htDropdown>
     <button type="button" class="button dropdown-trigger flex-row row-gap-4" htDropdownToggle>
@@ -27,10 +27,12 @@
 
     </div>
   </div>
-  <div class="flex flex-row row-gap-4" *ngIf="query$ | async as queries">
-    <div (click)="clearQuery(query.key)" class="query-label" *ngFor="let query of queries">
-      <span>{{query.label}}</span>
-      <i class="fa fa-close"></i>
+  <div class="field flex is-grouped is-grouped-multiline" *ngIf="query$ | async as queries">
+    <div class="control is-marginless" *ngFor="let query of queries">
+      <div class="tags has-addons">
+        <div class="tag is-primary">{{query.label}}</div>
+        <a (click)="clearQuery(query.key)" class="tag is-primary is-delete"></a>
+      </div>
     </div>
   </div>
   <ht-date-range></ht-date-range>
