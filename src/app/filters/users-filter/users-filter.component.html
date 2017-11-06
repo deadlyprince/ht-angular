@@ -30,8 +30,8 @@
   <div class="field flex is-grouped is-grouped-multiline" *ngIf="query$ | async as queries">
     <div class="control is-marginless" *ngFor="let query of queries">
       <div class="tags has-addons">
-        <div class="tag is-primary">{{query.label}}</div>
-        <a (click)="clearQuery(query.key)" class="tag is-primary is-delete"></a>
+        <div class="tag is-medium is-primary">{{query.label}}</div>
+        <a (click)="clearQuery(query.key)" class="tag is-medium is-primary is-delete"></a>
       </div>
     </div>
   </div>
