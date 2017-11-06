@@ -1,5 +1,5 @@
 <div class="flex-column justify-center label-container">
-  <div class="count text-center">{{summary.totalUsers}} {{'user' | pluralize: summary.totalUsers}}</div>
+  <div *ngIf="!hideTotal" class="count text-center">{{summary.totalUsers}} {{'user' | pluralize: summary.totalUsers}}</div>
   <div class="flex-row">
     <div class="bar" [style.flex-basis.%]="datum.value/summary.totalUsers * 100" [style.background-color]="datum.color" *ngFor="let datum of summary.chart; trackBy:indexId; let i = index"></div>
   </div>
