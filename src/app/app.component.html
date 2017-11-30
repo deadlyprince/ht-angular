@@ -1,3 +1,12 @@
-<a [routerLink]="[{ outlets: { modal: ['test', 'login'] } }]" class="button is-primary">login</a>
+<nav class="navbar is-dark">
+  <div class="navbar-brand">
+    <a [routerLink]="['users']" class="navbar-item">Hypertrack</a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <a [routerLink]="[{ outlets: { modal: ['test', 'login'] } }]" class="navbar-item">Login</a>
+    </div>
+  </div>
+</nav>
 <router-outlet></router-outlet>
 <router-outlet name="modal"></router-outlet>
