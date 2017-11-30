@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {GroupKeyGuard} from "./guard/group-key.guard";
 import {GroupKeyResolver} from "./guard/group-key-resolver";
-import {UikitComponent} from "./uikit/uikit.component";
 
 const routes: Routes = [
   // { path: 'ui', component: UikitComponent},
