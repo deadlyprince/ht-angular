@@ -1,0 +1,25 @@
+<div class="modal is-active">
+  <div (click)="close()" class="modal-background"></div>
+  <div class="modal-card">
+    <section class="modal-card-body">
+      <div class="columns is-centered" *ngIf="memberships$ | async as memberships">
+        <div class="column is-three-quarters">
+          <div class="card card-content has-text-weight-bold is-centered">
+            gaurav@hypertrack.io
+          </div>
+          <!--add searchbox in card-->
+          <div class="card card-content is-small" *ngFor="let membership of memberships">
+            {{membership.account.name}} {{membership.status}} {{membership.role}}
+          </div>
+          <div class="card card-content is-small">
+            smita is smart
+          </div>
+          <!--invite team member card-->
+        </div>
+
+        <!--<div class="column">Auto</div>-->
+        <!--<div class="column">Auto</div>-->
+      </div>
+    </section>
+  </div>
+</div>
