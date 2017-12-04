@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { HtAccountUsersService } from './ht-account-users.service';
+import { HtAccountService } from './ht-account-users.service';
 
-describe('HtAccountUsersService', () => {
+describe('HtAccountService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HtAccountUsersService]
+      providers: [HtAccountService]
     });
   });
 
-  it('should be created', inject([HtAccountUsersService], (service: HtAccountUsersService) => {
+  it('should be created', inject([HtAccountService], (service: HtAccountService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -1,7 +1,7 @@
-import {AccountUserClient} from "ht-client";
+import {AccountsClient} from "ht-client";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class HtAccountUsersService extends AccountUserClient{
+export class HtAccountService extends AccountsClient {
 
 }
