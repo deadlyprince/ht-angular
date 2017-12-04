@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccountsService} from "../../accounts/accounts.service";
 import {share} from "rxjs/operators";
 import {IMembership} from "ht-models";
+import {IAccount} from "ht-models/dist/typings/account";
 
 @Component({
   selector: 'ht-navbar',
@@ -29,9 +30,8 @@ export class NavbarComponent implements OnInit {
     this.accountsService.logout()
   }
 
-  setMembership(membership: IMembership) {
-    console.log(membership);
-    this.accountsService.setAccount(membership.account, false);
+  setAccount(account: IAccount) {
+    this.accountsService.setAccount(account, false);
     location.reload()
   }
 }
