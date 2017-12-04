@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import {ModalComponent} from "./modal.component";
 
 const routes: Routes = [
-  { path: "test", component: ModalComponent, outlet: 'modal', children: [
-    {path : "", loadChildren: "../login/login.module#LoginModule"},
-    {path : "", loadChildren: "../account-users-switcher/account-users-switcher.module#AccountUsersSwitcherModule"},
+  { path: "", component: ModalComponent, outlet: 'modal', children: [
+    {path : "login", loadChildren: "../login/login.module#LoginModule"},
+    {path : "accounts", loadChildren: "../account-users-switcher/account-users-switcher.module#AccountUsersSwitcherModule"},
   ]}
 ];
 
