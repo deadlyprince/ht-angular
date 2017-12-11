@@ -1,8 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IGroup, AllData} from "ht-models";
 import * as _ from "underscore";
 import {HtGroupsService} from "../ht/ht-groups.service";
 import {Page} from "ht-models/dist/typings/common";
+import {catchError, tap} from "rxjs/operators";
+import {empty} from "rxjs/observable/empty";
+import {of} from "rxjs/observable/of";
 
 @Component({
   selector: 'ht-groups-chart-container',
@@ -16,6 +19,9 @@ export class GroupsChartContainerComponent implements OnInit {
   selectedGroups = [];
   loading: boolean = false;
   noChild: boolean = false;
+  selectedGroup$;
+  error;
+  @Input() groupId: string;
   @Output() onGroup: EventEmitter<IGroup> = new EventEmitter();
   constructor(
     private groupService: HtGroupsService
@@ -24,20 +30,9 @@ export class GroupsChartContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.fillChildren("ecaec5e3-accb-4f77-a8bc-9dd54e38dc47")
-    this.fillChildren()
-    // this.groupService.getChildren("ecaec5e3-accb-4f77-a8bc-9dd54e38dc47").do((data: AllData<IGroup>) => {
-    //   const totalCount = data.count;
-    //   const currentCount = data ? Object.keys(data.resultsEntity).length : 0;
-    //   this.progress = 100 * currentCount / totalCount;
-    //   const isDone = data && !data.next;
-    //   if (isDone) {
-    //     this.progress = 100;
-    //     let groups = _.values(data.resultsEntity);
-    //     this.setGroups(groups, 1)
-    //   }
-    //   console.log("all groups", data);
-    // })
+    this.fillChildren(this.groupId);
+    this.fillSelectedGroup(this.groupId)
+
   }
 
   fillChildren(id?, level: number = 0) {
@@ -55,7 +50,19 @@ export class GroupsChartContainerComponent implements OnInit {
         const groups = data.results;
         this.setGroups(groups, level)
       }
+    }, (err) => {
+      this.error = err.error;
     })
+  }
+
+  fillSelectedGroup(id) {
+    if (!id) return false;
+    this.selectedGroup$ = this.groupService.item.api$(id).pipe(
+      catchError((err) => {
+        this.error = err.error;
+        return of(null)
+      })
+    )
   }
 
   setGroups(groups, level) {
@@ -76,8 +83,7 @@ export class GroupsChartContainerComponent implements OnInit {
     const id = group.id;
     event.stopPropagation();
     event.preventDefault();
-    // this.selectedGroups.splice(level, this.selectedGroups.length, id);
-    this.selectedGroups[level] = id;
+    this.selectedGroups[level] = group;
     level = +level + 1;
     this.fillChildren(id, level)
   }
@@ -86,6 +92,18 @@ export class GroupsChartContainerComponent implements OnInit {
     this.selectedGroups.splice(level);
     this.groupsLevels.splice(level);
     this.noChild = false;
+  }
+
+  clearRootTree() {
+    this.selectedGroups = [];
+    this.groupsLevels.splice(1);
+    this.noChild = false;
+  };
+
+  selectGroupFromNav(group, level) {
+    this.selectedGroups.splice(level + 1);
+    this.groupsLevels.splice(level + 2);
+    this.noChild = !this.groupsLevels[this.groupsLevels.length - 1].length
   }
 
 }
