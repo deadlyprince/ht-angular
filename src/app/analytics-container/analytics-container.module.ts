@@ -5,7 +5,8 @@ import {ActionsStatusGraphModule} from "../actions-status-graph/actions-status-g
 import {UsersAnalyticsListModule} from "../users-analytics-list/users-analytics-list.module";
 import {AnalyticsTestRoutingModule} from "../analytics-test/analytics-test-routing.module";
 import { AnalyticsSlotDirective } from './analytics-item/analytics-slot.directive';
-import {ActionsStatusGraphComponent, UsersAnalyticsListComponent} from "../../";
+import {ActionsStatusGraphComponent} from "../actions-status-graph/actions-status-graph.component";
+import {UsersAnalyticsListComponent} from "../users-analytics-list/users-analytics-list.component";
 import { AnalyticsItemsService } from './analytics-items.service';
 import { AnalyticsItemComponent } from './analytics-item/analytics-item.component';
 

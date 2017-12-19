@@ -7,9 +7,12 @@ import {IAnalyticsList, IUsersAnalyticsListConfig} from "../interfaces/analytics
 import {DistanceLocale, HMString} from "ht-utility";
 import {IUserAnalytics} from "ht-models";
 import {UsersAnalytics} from "ht-client";
+import {IAnalyticsItemService} from "../interfaces/analytics-item";
+import {UsersAnalyticsListComponent} from "./users-analytics-list.component";
 
 @Injectable()
-export class UsersAnalyticsListService implements IAnalyticsList {
+export class UsersAnalyticsListService implements IAnalyticsItemService {
+  component = UsersAnalyticsListComponent;
   dateRangeService$;
   title;
   tableFormat;
@@ -18,6 +21,8 @@ export class UsersAnalyticsListService implements IAnalyticsList {
   client: UsersAnalytics;
   dataArray$;
   dataTable$;
+  className = "is-6";
+  tags = ['users', 'list'];
   constructor(config: IUsersAnalyticsListConfig) {
     this.initState(config);
     this.initClient()
@@ -48,6 +53,10 @@ export class UsersAnalyticsListService implements IAnalyticsList {
 
       })
     );
+  };
+
+  setData(instance: UsersAnalyticsListComponent, initialConfig) {
+    instance.listService = this;
   }
 }
 

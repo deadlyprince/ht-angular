@@ -8,54 +8,11 @@ import {actionsConfigPreset, ActionsStatusGraphService} from "../actions-status-
 @Injectable()
 export class AnalyticsItemsService {
   items: IAnalyticsItem[] = [
-    {
-      component: ActionsStatusGraphComponent,
-      className: "is-12",
-      tags: ['actions'],
-      setData(instance: ActionsStatusGraphComponent) {
-        instance.service = new ActionsStatusGraphService(actionsConfigPreset.status)
-      }
-    },
-    {
-      component: UsersAnalyticsListComponent,
-      className: "is-6",
-      tags: ['users'],
-      setData(instance: UsersAnalyticsListComponent) {
-        instance.listService = new UsersAnalyticsListService(
-          usersAnalyticsListPresets.max_location_disabled_duration
-        );
-      }
-    },
-    {
-      component: UsersAnalyticsListComponent,
-      className: "is-6",
-      tags: ['users'],
-      setData(instance: UsersAnalyticsListComponent) {
-        instance.listService = new UsersAnalyticsListService(
-          usersAnalyticsListPresets.max_stop_duration
-        );
-      }
-    },
-    {
-      component: UsersAnalyticsListComponent,
-      className: "is-6",
-      tags: ['users'],
-      setData(instance: UsersAnalyticsListComponent) {
-        instance.listService = new UsersAnalyticsListService(
-          usersAnalyticsListPresets.max_network_offline
-        );
-      }
-    },
-    {
-      component: UsersAnalyticsListComponent,
-      className: "is-6",
-      tags: ['users'],
-      setData(instance: UsersAnalyticsListComponent) {
-        instance.listService = new UsersAnalyticsListService(
-          usersAnalyticsListPresets.max_distance
-        );
-      }
-    }
+    new ActionsStatusGraphService(actionsConfigPreset.status),
+    new UsersAnalyticsListService(usersAnalyticsListPresets.max_location_disabled_duration),
+    new UsersAnalyticsListService(usersAnalyticsListPresets.max_stop_duration),
+    new UsersAnalyticsListService(usersAnalyticsListPresets.max_network_offline),
+    new UsersAnalyticsListService(usersAnalyticsListPresets.max_distance),
   ];
   constructor() { }
 

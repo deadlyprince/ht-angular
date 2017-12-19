@@ -7,14 +7,19 @@ import {filter, map} from "rxjs/operators";
 import * as moment from "moment-mini"
 import {IActionsTrendlineConfig} from "../interfaces/trendline";
 import {ActionsGraph} from "ht-client";
+import {IAnalyticsItem, IAnalyticsItemService} from "../interfaces/analytics-item";
+import {ActionsStatusGraphComponent} from "./actions-status-graph.component";
 
 @Injectable()
-export class ActionsStatusGraphService {
+export class ActionsStatusGraphService implements IAnalyticsItemService {
+  component = ActionsStatusGraphComponent;
   client: ActionsGraph;
   dateRangeService$;
   data$;
   title;
   chartFormat;
+  tags = ['actions', 'graph'];
+  className = "is-12";
   constructor(config: IActionsTrendlineConfig) {
     this.initState(config);
     this.initClient();
@@ -54,6 +59,10 @@ export class ActionsStatusGraphService {
       labels,
       datasets
     }
+  }
+
+  setData(instance: ActionsStatusGraphComponent, initialConfig) {
+    instance.service = this
   }
 }
 
