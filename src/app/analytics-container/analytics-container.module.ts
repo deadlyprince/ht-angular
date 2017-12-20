@@ -10,13 +10,16 @@ import {UsersAnalyticsListComponent} from "../users-analytics-list/users-analyti
 import { AnalyticsItemsService } from './analytics-items.service';
 import { AnalyticsItemComponent } from './analytics-item/analytics-item.component';
 import { AnalyticsSelectorComponent } from './analytics-selector/analytics-selector.component';
+import {UsersSummaryChartModule} from "../users-summary-chart/users-summary-chart.module";
+import {UsersSummaryChartComponent} from "../users-summary-chart/users-summary-chart.component";
 
 @NgModule({
   imports: [
     CommonModule,
     AnalyticsTestRoutingModule,
     ActionsStatusGraphModule,
-    UsersAnalyticsListModule
+    UsersAnalyticsListModule,
+    UsersSummaryChartModule
   ],
   declarations: [
     AnalyticsContainerComponent,
@@ -32,7 +35,8 @@ import { AnalyticsSelectorComponent } from './analytics-selector/analytics-selec
   ],
   entryComponents: [
     UsersAnalyticsListComponent,
-    ActionsStatusGraphComponent
+    ActionsStatusGraphComponent,
+    UsersSummaryChartComponent
   ],
   providers: [AnalyticsItemsService]
 })

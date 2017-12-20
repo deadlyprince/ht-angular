@@ -15,7 +15,11 @@ export class AnalyticsSelectorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.choosenPreset.push(...this.analyticsItemsService.presets)
+    this.choosenPreset.push(...this.analyticsItemsService.presets);
+    // setTimeout(() => {
+    //   this.setPreset()
+    // });
+
   }
 
   isActive(preset) {
@@ -32,9 +36,7 @@ export class AnalyticsSelectorComponent implements OnInit {
   };
 
   setPreset() {
-    this.analyticsItemsService.items$.next(this.choosenPreset.map(preset => {
-      return new preset.service(preset.initialConfig)
-    }) );
+    this.analyticsItemsService.setPreset(this.choosenPreset);
     this.selected.next(true)
   }
 

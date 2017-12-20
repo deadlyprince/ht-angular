@@ -8,25 +8,38 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {map, take} from "rxjs/operators";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {Observable} from "rxjs/Observable";
+import {usersClientFactory, dateRangeFactory} from "ht-client";
+import {DateRangeMap} from "ht-data";
+import {HtUsersService} from "../ht/ht-users.service";
 
 @Injectable()
 export class AnalyticsItemsService {
 
-  presets = [
-    actionsConfigPreset.status,
-    usersAnalyticsListPresets.max_location_disabled_duration,
-    usersAnalyticsListPresets.max_stop_duration,
-    usersAnalyticsListPresets.max_network_offline,
-    usersAnalyticsListPresets.max_distance
-  ];
-  items$: BehaviorSubject<IAnalyticsItem[]> = new BehaviorSubject([]);
+  presets;
+  items$: BehaviorSubject<IAnalyticsItem[]>;
+  // items$: BehaviorSubject<IAnalyticsItem[]> = new BehaviorSubject([]);
   filteredItems$: Observable<IAnalyticsItem[]>;
   allTags$: Observable<string[]>;
   tags$: Observable<ISelectedTag[]>;
   selectedTags$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  constructor() {
+  totalTags: number;
+  // selectedTags$: BehaviorSubject<string[]>;
+  constructor(usersService: HtUsersService) {
+    const usersSummaryClient = usersClientFactory({dateRange$: dateRangeFactory(DateRangeMap.today).data$});
+    const activityQueryLabel = usersService.filterClass.activityQueryArray;
+    this.presets = [
+      usersAnalyticsListPresets.users_summary(usersSummaryClient),
+      usersAnalyticsListPresets.users_summary(usersSummaryClient, 'Users activity summary', activityQueryLabel),
+      actionsConfigPreset.status,
+      usersAnalyticsListPresets.max_location_disabled_duration(),
+      usersAnalyticsListPresets.max_stop_duration(),
+      usersAnalyticsListPresets.max_network_offline(),
+      usersAnalyticsListPresets.max_distance(),
+    ];
+    this.items$ = new BehaviorSubject(this.getItems(this.presets));
     this.allTags$ = this.items$.pipe(
       map(items => {
+        this.totalTags = items.length;
         return items.reduce((tags, item) => {
           const itemTags = item.tags;
           return itemTags.reduce((currentTags, tag) => {
@@ -41,7 +54,7 @@ export class AnalyticsItemsService {
       this.allTags$,
       this.selectedTags$,
       (allTags, selectedTags) => {
-        console.log("eit tags", allTags, selectedTags);
+        // console.log("eit tags", allTags, selectedTags);
         if (selectedTags.length === 0) {
           return allTags.map(tag => {
             return {key: tag, isActive: true}
@@ -49,7 +62,6 @@ export class AnalyticsItemsService {
         } else {
           return allTags.map(tag => {
             const isActive = selectedTags.includes(tag);
-            console.log("isA", isActive);
             return {key: tag, isActive}
           })
         }
@@ -74,12 +86,26 @@ export class AnalyticsItemsService {
       take(1)
     )
       .subscribe((tags) => {
+
         if (tags.includes(tag)) {
           tags.splice(tags.indexOf(tag), 1)
         } else {
           tags.push(tag)
         }
+        if (tags.length === this.totalTags) {
+          tags = [];
+        }
       this.selectedTags$.next([...tags])
+    })
+  };
+
+  setPreset(choosenPreset) {
+    this.items$.next(this.getItems(choosenPreset));
+  }
+
+  getItems(itemsConfigs) {
+    return itemsConfigs.map(preset => {
+      return new preset.service(preset.initialConfig)
     })
   }
 

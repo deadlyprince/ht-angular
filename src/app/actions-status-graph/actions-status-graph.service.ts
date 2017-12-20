@@ -18,7 +18,7 @@ export class ActionsStatusGraphService implements IAnalyticsItemService {
   data$;
   title;
   chartFormat;
-  tags = ['actions', 'graph'];
+  tags = ['actions'];
   className = "is-12";
   constructor(config: IActionsTrendlineConfig) {
     this.initState(config);

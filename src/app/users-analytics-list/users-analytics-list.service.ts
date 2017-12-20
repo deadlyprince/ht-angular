@@ -21,7 +21,7 @@ export class UsersAnalyticsListService implements IAnalyticsItemService {
   dataArray$;
   dataTable$;
   className = "is-6";
-  tags = ['users', 'list'];
+  tags = ['users'];
   constructor(config: IUsersAnalyticsListConfig) {
     this.initState(config);
     this.initClient()

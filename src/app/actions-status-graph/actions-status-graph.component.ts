@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import Chart from "frappe-charts/dist/frappe-charts.min.esm"
 import * as moment from "moment-mini"
 import {untilDestroy} from "../until-destroy";
@@ -16,6 +16,7 @@ export class ActionsStatusGraphComponent implements OnInit, AfterViewInit, OnDes
   data;
   chart;
   noData: boolean = false;
+  @ViewChild('chart') charElem;
   constructor() {
 
   }
@@ -25,7 +26,7 @@ export class ActionsStatusGraphComponent implements OnInit, AfterViewInit, OnDes
       untilDestroy(this)
     )
       .subscribe((data) => {
-        console.log("setchart");
+        // console.log("setchart");
         this.setChart(data);
     })
 
@@ -49,7 +50,7 @@ export class ActionsStatusGraphComponent implements OnInit, AfterViewInit, OnDes
       const type = data.labels.length > 1 ? 'line' : 'bar';
     } else {
       this.chart = new Chart({
-        parent: "#chart", // or a DOM element
+        parent: this.charElem.nativeElement, // or a DOM element
         // title: "Action Graph",
         data: data,
         type: 'line', // or 'line', 'scatter', 'pie', 'percentage'
