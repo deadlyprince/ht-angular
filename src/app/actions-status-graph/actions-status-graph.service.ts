@@ -29,6 +29,7 @@ export class ActionsStatusGraphService implements IAnalyticsItemService {
     this.dateRangeService$ = dateRangeFactory(config.initialDateRange || DateRangeMap.last_7_days);
     this.title = config.title || "Actions graph";
     this.chartFormat = config.chartFormat;
+    if (config.tags && config.tags.length) this.tags = [...this.tags, ...config.tags];
   }
 
   private initClient() {
@@ -61,34 +62,11 @@ export class ActionsStatusGraphService implements IAnalyticsItemService {
     }
   }
 
-  setData(instance: ActionsStatusGraphComponent, initialConfig) {
+  setData(instance: ActionsStatusGraphComponent) {
     instance.service = this
   }
 }
 
-export interface IActionsConfigPreset {
-  [name: string]: IActionsTrendlineConfig
-}
-export const actionsConfigPreset: IActionsConfigPreset = {
-  "status": {
-    title: "Actions status chart",
-    initialDateRange: DateRangeMap.last_30_days,
-    chartFormat: [
-      {
-        title: "Completed",
-        selector(graphData: IActionStatusGraph) {
-          return graphData.completed
-        }
-      },
-      {
-        title: "Assigned",
-        selector(graphData: IActionStatusGraph) {
-          return graphData.assigned
-        }
-      }
 
-    ]
-  }
-};
 
 

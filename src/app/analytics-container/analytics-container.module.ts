@@ -9,6 +9,7 @@ import {ActionsStatusGraphComponent} from "../actions-status-graph/actions-statu
 import {UsersAnalyticsListComponent} from "../users-analytics-list/users-analytics-list.component";
 import { AnalyticsItemsService } from './analytics-items.service';
 import { AnalyticsItemComponent } from './analytics-item/analytics-item.component';
+import { AnalyticsSelectorComponent } from './analytics-selector/analytics-selector.component';
 
 @NgModule({
   imports: [
@@ -17,9 +18,22 @@ import { AnalyticsItemComponent } from './analytics-item/analytics-item.componen
     ActionsStatusGraphModule,
     UsersAnalyticsListModule
   ],
-  declarations: [AnalyticsContainerComponent, AnalyticsSlotDirective, AnalyticsItemComponent],
-  exports: [AnalyticsContainerComponent, AnalyticsSlotDirective, AnalyticsItemComponent],
-  entryComponents: [UsersAnalyticsListComponent, ActionsStatusGraphComponent],
+  declarations: [
+    AnalyticsContainerComponent,
+    AnalyticsSlotDirective,
+    AnalyticsItemComponent,
+    AnalyticsSelectorComponent
+  ],
+  exports: [
+    AnalyticsContainerComponent,
+    AnalyticsSlotDirective,
+    AnalyticsItemComponent,
+    AnalyticsSelectorComponent
+  ],
+  entryComponents: [
+    UsersAnalyticsListComponent,
+    ActionsStatusGraphComponent
+  ],
   providers: [AnalyticsItemsService]
 })
 export class AnalyticsContainerModule { }

@@ -1,19 +1,91 @@
 import { Injectable } from '@angular/core';
 import {IAnalyticsItem} from "../interfaces/analytics-item";
-import {UsersAnalyticsListComponent} from "../users-analytics-list/users-analytics-list.component";
-import {usersAnalyticsListPresets, UsersAnalyticsListService} from "../users-analytics-list/users-analytics-list.service";
-import {ActionsStatusGraphComponent} from "../../";
-import {actionsConfigPreset, ActionsStatusGraphService} from "../actions-status-graph/actions-status-graph.service";
+import { UsersAnalyticsListService} from "../users-analytics-list/users-analytics-list.service";
+import {ActionsStatusGraphService} from "../actions-status-graph/actions-status-graph.service";
+import {usersAnalyticsListPresets} from "./analytics-presets/users-list-preset";
+import {actionsConfigPreset} from "./analytics-presets/actions-status-graph-preset";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {map, take} from "rxjs/operators";
+import {combineLatest} from "rxjs/observable/combineLatest";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AnalyticsItemsService {
-  items: IAnalyticsItem[] = [
-    new ActionsStatusGraphService(actionsConfigPreset.status),
-    new UsersAnalyticsListService(usersAnalyticsListPresets.max_location_disabled_duration),
-    new UsersAnalyticsListService(usersAnalyticsListPresets.max_stop_duration),
-    new UsersAnalyticsListService(usersAnalyticsListPresets.max_network_offline),
-    new UsersAnalyticsListService(usersAnalyticsListPresets.max_distance),
-  ];
-  constructor() { }
 
+  presets = [
+    actionsConfigPreset.status,
+    usersAnalyticsListPresets.max_location_disabled_duration,
+    usersAnalyticsListPresets.max_stop_duration,
+    usersAnalyticsListPresets.max_network_offline,
+    usersAnalyticsListPresets.max_distance
+  ];
+  items$: BehaviorSubject<IAnalyticsItem[]> = new BehaviorSubject([]);
+  filteredItems$: Observable<IAnalyticsItem[]>;
+  allTags$: Observable<string[]>;
+  tags$: Observable<ISelectedTag[]>;
+  selectedTags$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  constructor() {
+    this.allTags$ = this.items$.pipe(
+      map(items => {
+        return items.reduce((tags, item) => {
+          const itemTags = item.tags;
+          return itemTags.reduce((currentTags, tag) => {
+            return currentTags.includes(tag) ? currentTags : [...currentTags, tag]
+          }, tags)
+          // return tags.includes()
+        }, [])
+      })
+    );
+
+    this.tags$ = combineLatest(
+      this.allTags$,
+      this.selectedTags$,
+      (allTags, selectedTags) => {
+        console.log("eit tags", allTags, selectedTags);
+        if (selectedTags.length === 0) {
+          return allTags.map(tag => {
+            return {key: tag, isActive: true}
+          })
+        } else {
+          return allTags.map(tag => {
+            const isActive = selectedTags.includes(tag);
+            console.log("isA", isActive);
+            return {key: tag, isActive}
+          })
+        }
+      }
+    );
+
+    this.filteredItems$ = combineLatest(
+      this.items$,
+      this.selectedTags$,
+      (items, tags) => {
+        return tags.length ? items.filter((item) => {
+          return tags.reduce((pass, existingTag) => {
+            return pass || item.tags.includes(existingTag)
+          }, false)
+        }) : items;
+      }
+    )
+  }
+
+  toggleTag(tag: string) {
+    this.selectedTags$.pipe(
+      take(1)
+    )
+      .subscribe((tags) => {
+        if (tags.includes(tag)) {
+          tags.splice(tags.indexOf(tag), 1)
+        } else {
+          tags.push(tag)
+        }
+      this.selectedTags$.next([...tags])
+    })
+  }
+
+}
+
+export interface ISelectedTag {
+  key: string,
+  isActive: boolean,
 }
