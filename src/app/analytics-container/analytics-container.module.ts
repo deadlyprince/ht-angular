@@ -12,6 +12,7 @@ import { AnalyticsItemComponent } from './analytics-item/analytics-item.componen
 import { AnalyticsSelectorComponent } from './analytics-selector/analytics-selector.component';
 import {UsersSummaryChartModule} from "../users-summary-chart/users-summary-chart.module";
 import {UsersSummaryChartComponent} from "../users-summary-chart/users-summary-chart.component";
+import {AnalyticsTagsModule} from "./analytics-tags/analytics-tags.module";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {UsersSummaryChartComponent} from "../users-summary-chart/users-summary-c
     AnalyticsTestRoutingModule,
     ActionsStatusGraphModule,
     UsersAnalyticsListModule,
-    UsersSummaryChartModule
+    UsersSummaryChartModule,
+    AnalyticsTagsModule
   ],
   declarations: [
     AnalyticsContainerComponent,
