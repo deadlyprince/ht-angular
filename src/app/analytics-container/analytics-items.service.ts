@@ -55,16 +55,20 @@ export class AnalyticsItemsService {
       this.selectedTags$,
       (allTags, selectedTags) => {
         // console.log("eit tags", allTags, selectedTags);
-        if (selectedTags.length === 0) {
-          return allTags.map(tag => {
-            return {key: tag, isActive: true}
-          })
-        } else {
-          return allTags.map(tag => {
-            const isActive = selectedTags.includes(tag);
-            return {key: tag, isActive}
-          })
-        }
+        // if (selectedTags.length === 0) {
+        //   return allTags.map(tag => {
+        //     return {key: tag, isActive: true}
+        //   })
+        // } else {
+        //   return allTags.map(tag => {
+        //     const isActive = selectedTags.includes(tag);
+        //     return {key: tag, isActive}
+        //   })
+        // }
+        return allTags.map(tag => {
+          const isActive = selectedTags.includes(tag);
+          return {key: tag, isActive}
+        })
       }
     );
 
@@ -87,14 +91,19 @@ export class AnalyticsItemsService {
     )
       .subscribe((tags) => {
 
+        // if (tags.includes(tag)) {
+        //   tags.splice(tags.indexOf(tag), 1)
+        // } else {
+        //   tags.push(tag)
+        // }
         if (tags.includes(tag)) {
-          tags.splice(tags.indexOf(tag), 1)
+          tags = []
         } else {
-          tags.push(tag)
+          tags = [tag]
         }
-        if (tags.length === this.totalTags) {
-          tags = [];
-        }
+        // if (tags.length === this.totalTags) {
+        //   tags = [];
+        // }
       this.selectedTags$.next([...tags])
     })
   };
