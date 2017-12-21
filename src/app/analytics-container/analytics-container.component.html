@@ -24,14 +24,17 @@
   <div class="columns is-multiline" *ngIf="analyticsItemsService.filteredItems$ | async as items">
     <div class="column" [ngClass]="item.className" *ngFor="let item of items">
       <div class="card card-content">
-        <ht-analytics-tags [tags]="item.tags"></ht-analytics-tags>
+        <ht-analytics-tags
+          (selectTag)="analyticsItemsService.toggleTag($event)"
+          [tags]="item.tags"
+          [selectedTags]="analyticsItemsService.selectedTags$ | async"></ht-analytics-tags>
         <ht-analytics-item [item]="item"></ht-analytics-item>
       </div>
     </div>
     <div class="column is-6 auto setup" *ngIf="items.length == 0">
-      <div class="is-size-1">Add analytics views</div>
+      <div class="is-size-1 has-text-centered has-text-grey-light">No view is selected</div>
     </div>
-    <div class="modal is-active" *ngIf="(items.length == 0) || configure">
+    <div class="modal is-active" *ngIf="configure">
       <div class="modal-background" (click)="configure = false"></div>
       <div class="modal-card">
         <header class="modal-card-head">

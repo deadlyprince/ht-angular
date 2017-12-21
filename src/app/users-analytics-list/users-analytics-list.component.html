@@ -14,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr (click)="showUserDetail(row)" *ngFor="let row of listService.dataTable$ | async">
+    <tr class="clickable" (click)="showUserDetail(row)" *ngFor="let row of listService.dataTable$ | async">
       <td *ngFor="let item of row.values">{{item}}</td>
     </tr>
     </tbody>

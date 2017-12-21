@@ -77,9 +77,12 @@ export class AnalyticsItemsService {
       this.selectedTags$,
       (items, tags) => {
         return tags.length ? items.filter((item) => {
-          return tags.reduce((pass, existingTag) => {
-            return pass || item.tags.includes(existingTag)
-          }, false)
+          return tags.reduce((pass, selectedTag) => {
+            return pass && item.tags.includes(selectedTag)
+          }, true);
+          // return tags.reduce((pass, existingTag) => {
+          //   return pass || item.tags.includes(existingTag)
+          // }, false)
         }) : items;
       }
     )
@@ -91,16 +94,16 @@ export class AnalyticsItemsService {
     )
       .subscribe((tags) => {
 
-        // if (tags.includes(tag)) {
-        //   tags.splice(tags.indexOf(tag), 1)
-        // } else {
-        //   tags.push(tag)
-        // }
         if (tags.includes(tag)) {
-          tags = []
+          tags.splice(tags.indexOf(tag), 1)
         } else {
-          tags = [tag]
+          tags.push(tag)
         }
+        // if (tags.includes(tag)) {
+        //   tags = []
+        // } else {
+        //   tags = [tag]
+        // }
         // if (tags.length === this.totalTags) {
         //   tags = [];
         // }
