@@ -29,12 +29,13 @@ export class AnalyticsItemsService {
   constructor(usersService: HtUsersService) {
     const usersClient = usersClientFactory({dateRange$: dateRangeFactory(DateRangeMap.today).data$});
     const activityQueryLabel = usersClient.filterClass.activityQueryArray;
-    const actionsClient = actionsClientFactory({dateRange$: dateRangeFactory(DateRangeMap.today).data$});
+    const actionDateRangeService = dateRangeFactory(DateRangeMap.today);
+    const actionsClient = actionsClientFactory({dateRange$: actionDateRangeService.data$});
     const actionsStatusQueryLabel = [];
     this.presets = [
       // actionsConfigPreset.max_distance(),
       // actionsConfigPreset.max_duration(),
-      actionsConfigPreset.summary(actionsClient),
+      actionsConfigPreset.summary(actionsClient, actionDateRangeService),
       // usersAnalyticsListPresets.users_summary(usersClient),
       usersAnalyticsListPresets.users_summary(usersClient, 'Users activity summary', activityQueryLabel),
       actionsConfigPreset.status(),

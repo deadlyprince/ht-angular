@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
+import {IAnalyticsItemService} from "../interfaces/analytics-item";
+import {ActionsAnalyticsListComponent} from "./actions-analytics-list.component";
+import {IAnalyticsListConfig} from "../interfaces/analytics-list";
+import {filter, map} from "rxjs/operators";
+import {UsersAnalyticsListComponent} from "../users-analytics-list/users-analytics-list.component";
+import { ActionsList } from "ht-client";
 import {dateRangeFactory} from "ht-client";
 import {DateRangeMap} from "ht-data";
-import {filter, map} from "rxjs/operators";
-import {usersClientFactory} from "ht-client";
-import {IAnalyticsList, IAnalyticsListConfig} from "../interfaces/analytics-list";
-
-import {UsersAnalytics} from "ht-client";
-import {IAnalyticsItemService} from "../interfaces/analytics-item";
-import {UsersAnalyticsListComponent} from "./users-analytics-list.component";
+import {actionsClientFactory} from "ht-client";
 
 @Injectable()
-export class UsersAnalyticsListService implements IAnalyticsItemService {
-  component = UsersAnalyticsListComponent;
+export class ActionsAnalyticsListService implements IAnalyticsItemService {
+  component = ActionsAnalyticsListComponent;
+  className = "is-6";
+  tags = ['actions'];
   dateRangeService$;
   title;
   tableFormat;
   query;
   columns;
-  client: UsersAnalytics;
+  client: ActionsList;
   dataArray$;
   dataTable$;
-  className = "is-6";
-  tags = ['users'];
   hideDatePicker: boolean;
   constructor(config: IAnalyticsListConfig) {
     this.initState(config);
@@ -39,7 +39,7 @@ export class UsersAnalyticsListService implements IAnalyticsItemService {
   }
 
   private initClient(config) {
-    const userClient  = usersClientFactory({dateRange$: this.dateRangeService$.data$});
+    const userClient  = actionsClientFactory({dateRange$: this.dateRangeService$.data$});
     this.client = userClient.list;
     this.client.updateStrategy = config.updateStrategy || "once";
     this.client.setQuery(this.query);
@@ -60,9 +60,5 @@ export class UsersAnalyticsListService implements IAnalyticsItemService {
   setData(instance: UsersAnalyticsListComponent) {
     instance.listService = this;
   }
+
 }
-
-
-
-
-

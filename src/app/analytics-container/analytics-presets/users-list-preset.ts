@@ -1,18 +1,20 @@
-import {DistanceLocale, HMString} from "ht-utility";
-import {IUsersAnalyticsListConfig} from "../../interfaces/analytics-list";
+import {DateString, DistanceLocale, HMString, TimeString} from "ht-utility";
+import {IAnalyticsListConfig} from "../../interfaces/analytics-list";
 import {IUserAnalytics} from "ht-models";
 import {UsersAnalyticsListService} from "../../users-analytics-list/users-analytics-list.service";
 import {UsersSummaryService} from "../../users-summary-chart/users-summary.service";
-import {IUsersSummaryConfig} from "../../interfaces/users-analytics";
+import {ISummaryConfig} from "../../interfaces/users-analytics";
+import {IActionsTrendlineConfig} from "../../interfaces/trendline";
+import {DateRangeMap} from "ht-data";
 
 export interface IPreset {
   service: any,
-  initialConfig: IUsersAnalyticsListConfig | IUsersSummaryConfig
+  initialConfig: IAnalyticsListConfig | ISummaryConfig<any> | IActionsTrendlineConfig
 }
-export interface IUsersListPreset {
+export interface IAnalyticsPresets {
   [name: string]: (...args: any[]) => IPreset
 }
-export const usersAnalyticsListPresets: IUsersListPreset = {
+export const usersAnalyticsListPresets: IAnalyticsPresets = {
   max_location_disabled_duration() {
     return {
       service: UsersAnalyticsListService,
@@ -51,7 +53,7 @@ export const usersAnalyticsListPresets: IUsersListPreset = {
       initialConfig: {
         title: "Users with max stop duration",
         query: {ordering: "-stop_duration"},
-        tags: ['utilization'],
+        tags: ['activity'],
         tableFormat: [
           {
             column: "Name",
@@ -117,7 +119,7 @@ export const usersAnalyticsListPresets: IUsersListPreset = {
       initialConfig: {
         title: "Users with max distance",
         query: {ordering: "-total_distance"},
-        tags: ['utilization'],
+        tags: ['distance'],
         tableFormat: [
           {
             column: "Name",
@@ -142,7 +144,59 @@ export const usersAnalyticsListPresets: IUsersListPreset = {
       initialConfig: {
         title: title || "Users status summary",
         queryLabels,
-        usersClient,
+        client: usersClient,
+      }
+    }
+  },
+  last_recorded() {
+    return {
+      service: UsersAnalyticsListService,
+      initialConfig: {
+        title: "Most Recent active users",
+        query: {ordering: "-last_heartbeat_at"},
+        tags: ['live'],
+        initialDateRange: DateRangeMap.last_30_days,
+        hideDatePicker: true,
+        tableFormat: [
+          {
+            column: "Name",
+            selector(user: IUserAnalytics) {
+              return user.name
+            }
+          },
+          {
+            column: "Last updated at",
+            selector(user: IUserAnalytics) {
+              return user.last_heartbeat_at ?
+                TimeString(user.last_heartbeat_at) + " " + DateString(user.last_heartbeat_at, 'short') : "--"
+            }
+          }
+        ]
+      }
+    }
+  },
+  users_actions() {
+    return {
+      service: UsersAnalyticsListService,
+      initialConfig: {
+        title: "Users with max actions",
+        query: {ordering: "-num_actions"},
+        tags: ['actions'],
+        initialDateRange: DateRangeMap.today,
+        tableFormat: [
+          {
+            column: "Name",
+            selector(user: IUserAnalytics) {
+              return user.name
+            }
+          },
+          {
+            column: "Number of actions",
+            selector(user: IUserAnalytics) {
+              return user.num_actions ? user.num_actions : "--"
+            }
+          }
+        ]
       }
     }
   }

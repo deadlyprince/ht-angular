@@ -16,10 +16,12 @@ export interface ITableFormat {
   selector(data?): string
 }
 
-export interface IUsersAnalyticsListConfig {
-  initialDateRange$?: IDateRange,
+export interface IAnalyticsListConfig {
+  initialDateRange?: IDateRange,
   title: string,
   query: object,
   tableFormat: ITableFormat[],
-  tags?: string[]
+  updateStrategy?: string,
+  tags?: string[],
+  hideDatePicker?: boolean
 };
