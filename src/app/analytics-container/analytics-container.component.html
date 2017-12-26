@@ -77,7 +77,7 @@
   </div>
 </div>
 <div class="container">
-  <div class="columns is-multiline" *ngIf="analyticsItemsService.filteredItems$ | async as items">
+  <div class="columns is-multiline is-centered" *ngIf="analyticsItemsService.filteredItems$ | async as items">
     <div class="column" [ngClass]="item.className" *ngFor="let item of items">
       <div class="card card-content">
         <ht-analytics-tags

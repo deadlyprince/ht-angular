@@ -33,7 +33,7 @@ export class UsersAnalyticsListService implements IAnalyticsItemService {
     this.title = config.title;
     this.tableFormat = config.tableFormat;
     this.query = config.query;
-    this.columns = this.tableFormat.map(data => data.column);
+    this.columns = this.tableFormat.map(data => data.label);
     this.hideDatePicker = config.hideDatePicker;
     if (config.tags && config.tags.length) this.tags = [...this.tags, ...config.tags]
   }

@@ -1,5 +1,5 @@
 import {IActionStatusGraph} from "ht-models";
-import {DateRangeMap} from "ht-data";
+import {DateRangeMap, actionTableFormat} from "ht-data";
 import {ActionsStatusGraphService} from "../../actions-status-graph/actions-status-graph.service";
 import {IAnalyticsPresets} from "./users-list-preset";
 import {ActionsAnalyticsListService} from "../../actions-analytics-list/actions-analytics-list.service";
@@ -42,29 +42,19 @@ export const actionsConfigPreset: IAnalyticsPresets = {
         query: {ordering: '-distance'},
         tableFormat: [
           {
-            column: "id",
+            label: "id",
             selector(action: IAction) {
               return action.lookup_id || "NA"
             }
           },
           {
-            column: "Type",
+            label: "Type",
             selector(action: IAction) {
               return action.type
             }
           },
-          {
-            column: "distance",
-            selector(action: IAction) {
-              return action.distance ? DistanceLocale(action.distance) : "--"
-            }
-          },
-          {
-            column: "total duration",
-            selector(action: IAction) {
-              return action.duration ? HMString(action.duration / 60) : "--"
-            }
-          }
+          actionTableFormat.distance,
+          actionTableFormat.duration
         ]
       }
     }
@@ -81,25 +71,20 @@ export const actionsConfigPreset: IAnalyticsPresets = {
         initialDateRange: DateRangeMap.last_30_days,
         tableFormat: [
           {
-            column: "User",
+            label: "User",
             selector(action: IAction) {
               return action.user ? NameCase(action.user.name) : "NA";
             }
           },
           {
-            column: "Type",
+            label: "Type",
             selector(action: IAction) {
               return action.type
             }
           },
+          actionTableFormat.assigned_at,
           {
-            column: "Assigned at",
-            selector(action: IAction) {
-              return action.assigned_at ? TimeString(action.assigned_at) + " " + DateString(action.assigned_at, 'short') : "--"
-            }
-          },
-          {
-            column: "Expected at",
+            label: "Expected at",
             selector(action: IAction) {
               return action.expected_at ?
                 TimeString(action.expected_at) + " " + DateString(action.expected_at, 'short') : action.eta ?
@@ -107,7 +92,7 @@ export const actionsConfigPreset: IAnalyticsPresets = {
             }
           },
           {
-            column: "Distance remaining",
+            label: "Distance remaining",
             selector(action: IAction) {
               return action.display.distance_remaining ? DistanceLocale(action.display.distance_remaining) : "--"
             }
@@ -128,37 +113,25 @@ export const actionsConfigPreset: IAnalyticsPresets = {
         initialDateRange: DateRangeMap.last_30_days,
         tableFormat: [
           {
-            column: "User",
+            label: "User",
             selector(action: IAction) {
               return action.user ? NameCase(action.user.name) : "NA";
             }
           },
           {
-            column: "Type",
+            label: "Type",
             selector(action: IAction) {
               return action.type
             }
           },
+          actionTableFormat.completed_at,
           {
-            column: "Completed at",
-            selector(action: IAction) {
-              return action.completed_at ? TimeString(action.completed_at) + " " + DateString(action.completed_at, 'short') : "--"
-            }
-          },
-          {
-            column: "Ontime",
+            label: "Ontime",
             selector(action: IAction) {
               return action.display.is_late ? "Late" : "Ontime"
             }
           },
-          {
-            column: "Distance/Duration",
-            selector(action: IAction) {
-              const distance = action.distance ? DistanceLocale(action.distance) : "--";
-              const duration = action.duration ? HMString(action.duration) : "--";
-              return `${distance} / ${duration}`
-            }
-          }
+          actionTableFormat['distance&duration']
         ]
       }
     }
@@ -171,29 +144,19 @@ export const actionsConfigPreset: IAnalyticsPresets = {
         query: {ordering: '-duration'},
         tableFormat: [
           {
-            column: "User",
+            label: "User",
             selector(action: IAction) {
               return  action.user ? NameCase(action.user.name) : "NA";
             }
           },
           {
-            column: "Type",
+            label: "Type",
             selector(action: IAction) {
               return action.type
             }
           },
-          {
-            column: "duration",
-            selector(action: IAction) {
-              return action.duration ? HMString(action.duration / 60) : "--"
-            }
-          },
-          {
-            column: "total distance",
-            selector(action: IAction) {
-              return action.distance ? DistanceLocale(action.distance) : "--"
-            }
-          }
+          actionTableFormat.duration,
+          actionTableFormat.distance
         ]
       }
     }
@@ -209,31 +172,26 @@ export const actionsConfigPreset: IAnalyticsPresets = {
         hideDatePicker: true,
         tableFormat: [
           {
-            column: "Name",
+            label: "Name",
             selector(action: IAction) {
               return action.user ? action.user.name : "NA"
             }
           },
+          actionTableFormat.assigned_at,
           {
-            column: "Assigned at",
-            selector(action: IAction) {
-              return action.assigned_at ? TimeString(action.assigned_at) : "--"
-            }
-          },
-          {
-            column: "Last updated at",
+            label: "Last updated at",
             selector(action: IAction) {
               return action.user ? TimeString(action.user.last_heartbeat_at) : "--"
             }
           },
           {
-            column: "Action type",
+            label: "Action type",
             selector(action: IAction) {
               return action.type
             }
           },
           {
-            column: "Expected At",
+            label: "Expected At",
             selector(action: IAction) {
 
               return action.expected_at ?

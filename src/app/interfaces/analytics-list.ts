@@ -12,7 +12,7 @@ export interface IAnalyticsList extends  IAnalyticsItemService{
 }
 
 export interface ITableFormat {
-  column: string,
+  label: string,
   selector(data?): string
 }
 

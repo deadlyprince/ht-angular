@@ -5,7 +5,7 @@ import {UsersAnalyticsListService} from "../../users-analytics-list/users-analyt
 import {UsersSummaryService} from "../../users-summary-chart/users-summary.service";
 import {ISummaryConfig} from "../../interfaces/users-analytics";
 import {IActionsTrendlineConfig} from "../../interfaces/trendline";
-import {DateRangeMap} from "ht-data";
+import {DateRangeMap, userTableFormat} from "ht-data";
 
 export interface IPreset {
   service: any,
@@ -24,19 +24,14 @@ export const usersAnalyticsListPresets: IAnalyticsPresets = {
         tags: ['user behaviour', 'device health'],
         tableFormat: [
           {
-            column: "Name",
+            label: "Name",
             selector(user: IUserAnalytics) {
               return user.name
             }
           },
+          userTableFormat.location_disabled_duration,
           {
-            column: "Location disabled duration",
-            selector(user: IUserAnalytics) {
-              return user.location_disabled_duration ? HMString(user.location_disabled_duration / 60) : "--"
-            }
-          },
-          {
-            column: "% of total duration",
+            label: "% of total duration",
             selector(user: IUserAnalytics) {
               return user.total_duration && user.location_disabled_duration ?
                 (100 * (user.location_disabled_duration / user.total_duration)).toFixed(1) :
@@ -56,19 +51,14 @@ export const usersAnalyticsListPresets: IAnalyticsPresets = {
         tags: ['activity'],
         tableFormat: [
           {
-            column: "Name",
+            label: "Name",
             selector(user: IUserAnalytics) {
               return user.name
             }
           },
+          userTableFormat.stop_duration,
           {
-            column: "Stop duration",
-            selector(user: IUserAnalytics) {
-              return user.stop_duration ? HMString(user.stop_duration / 60) : "--"
-            }
-          },
-          {
-            column: "% of total duration",
+            label: "% of total duration",
             selector(user: IUserAnalytics) {
               return user.total_duration && user.stop_duration ?
                 (100 * (user.stop_duration / user.total_duration)).toFixed(1) :
@@ -89,19 +79,14 @@ export const usersAnalyticsListPresets: IAnalyticsPresets = {
         tags: ['device health'],
         tableFormat: [
           {
-            column: "Name",
+            label: "Name",
             selector(user: IUserAnalytics) {
               return user.name
             }
           },
+          userTableFormat.network_offline_duration,
           {
-            column: "network offline duration",
-            selector(user: IUserAnalytics) {
-              return user.network_offline_duration ? HMString(user.network_offline_duration / 60) : "--"
-            }
-          },
-          {
-            column: "% of total duration",
+            label: "% of total duration",
             selector(user: IUserAnalytics) {
               return user.total_duration && user.network_offline_duration ?
                 (100 * (user.network_offline_duration / user.total_duration)).toFixed(1) :
@@ -122,17 +107,12 @@ export const usersAnalyticsListPresets: IAnalyticsPresets = {
         tags: ['distance'],
         tableFormat: [
           {
-            column: "Name",
+            label: "Name",
             selector(user: IUserAnalytics) {
               return user.name
             }
           },
-          {
-            column: "total distance",
-            selector(user: IUserAnalytics) {
-              return user.total_distance ? DistanceLocale(user.total_distance) : "--"
-            }
-          }
+          userTableFormat.total_distance
         ]
       }
     }
@@ -159,18 +139,12 @@ export const usersAnalyticsListPresets: IAnalyticsPresets = {
         hideDatePicker: true,
         tableFormat: [
           {
-            column: "Name",
+            label: "Name",
             selector(user: IUserAnalytics) {
               return user.name
             }
           },
-          {
-            column: "Last updated at",
-            selector(user: IUserAnalytics) {
-              return user.last_heartbeat_at ?
-                TimeString(user.last_heartbeat_at) + " " + DateString(user.last_heartbeat_at, 'short') : "--"
-            }
-          }
+          userTableFormat.last_heartbeat_at
         ]
       }
     }
@@ -185,17 +159,12 @@ export const usersAnalyticsListPresets: IAnalyticsPresets = {
         initialDateRange: DateRangeMap.today,
         tableFormat: [
           {
-            column: "Name",
+            label: "Name",
             selector(user: IUserAnalytics) {
               return user.name
             }
           },
-          {
-            column: "Number of actions",
-            selector(user: IUserAnalytics) {
-              return user.num_actions ? user.num_actions : "--"
-            }
-          }
+          userTableFormat.num_actions
         ]
       }
     }
