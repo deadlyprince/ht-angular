@@ -78,7 +78,7 @@
 </div>
 <div class="container">
   <div class="columns is-multiline is-centered" *ngIf="analyticsItemsService.filteredItems$ | async as items">
-    <div class="column" [ngClass]="item.className" *ngFor="let item of items">
+    <div class="column" [@card-appear] [ngClass]="item.className" *ngFor="let item of items">
       <div class="card card-content">
         <ht-analytics-tags
           (selectTag)="analyticsItemsService.toggleTag($event)"
